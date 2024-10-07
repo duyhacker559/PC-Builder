@@ -31,7 +31,9 @@ public class PC_Builder {
         thietBi_1.themSanPhamTuongThich(thietBi_3);
         thietBi_1.lietKeCacSanPhamTuongThich(sc);
         
-        thietBi_3.ten = "Chuot B";
+        thietBi_3.setTen("Chuot B");
         thietBi_1.lietKeCacSanPhamTuongThich(sc);
+        
+        System.out.println("");
     }
 }

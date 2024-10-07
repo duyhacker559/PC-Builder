@@ -9,15 +9,15 @@ import java.util.*;
  * @author Admin
  */
 public class ThietBi {
-    static int id = 1;
+    private static int id = 1;
     
     // Du lieu san pham
     
-    String ten;
-    String loai;
-    String hang;
+    private String ten;
+    private String loai;
+    private String hang;
     private String ma;
-    long gia;
+    private long gia;
 
     private ArrayList<ThietBi> sanPhamTuongThich = new ArrayList<ThietBi>();
     
@@ -57,6 +57,62 @@ public class ThietBi {
     
     public void xoaSanPhamTuongThich(ThietBi item) {
         sanPhamTuongThich.remove(item);
+    }
+
+    public static int getId() {
+        return id;
+    }
+
+    public static void setId(int id) {
+        ThietBi.id = id;
+    }
+
+    public String getTen() {
+        return ten;
+    }
+
+    public void setTen(String ten) {
+        this.ten = ten;
+    }
+
+    public String getLoai() {
+        return loai;
+    }
+
+    public void setLoai(String loai) {
+        this.loai = loai;
+    }
+
+    public String getHang() {
+        return hang;
+    }
+
+    public void setHang(String hang) {
+        this.hang = hang;
+    }
+
+    public String getMa() {
+        return ma;
+    }
+
+    public void setMa(String ma) {
+        this.ma = ma;
+    }
+
+    public long getGia() {
+        return gia;
+    }
+
+    public void setGia(long gia) {
+        this.gia = gia;
+    }
+
+    public ArrayList<ThietBi> getSanPhamTuongThich() {
+        return sanPhamTuongThich;
+    }
+
+    public void setSanPhamTuongThich(ArrayList<ThietBi> sanPhamTuongThich) {
+        this.sanPhamTuongThich = sanPhamTuongThich;
     }
     
     @Override
