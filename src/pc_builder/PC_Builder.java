@@ -4,6 +4,7 @@
  */
 
 package pc_builder;
+import java.sql.SQLException;
 import java.util.*;
 /**
  *
@@ -14,10 +15,12 @@ public class PC_Builder {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         // TODO code application logic here
         Scanner sc = new Scanner(System.in);
-        
+        Login.main(args);
+        Login login = new Login();
+        login.getAdminAccountList();
         ThietBi thietBi_1 = new ThietBi("Man hinh A", "Man hinh may tinh", "ASUS", 1300000);
         ThietBi thietBi_2 = new ThietBi("Ban phim A", "Ban phim may tinh", "ASUS", 400000);
         ThietBi thietBi_3 = new ThietBi("Chuot A", "Chuot may tinh", "ASUS", 200000);
@@ -35,5 +38,8 @@ public class PC_Builder {
         thietBi_1.lietKeCacSanPhamTuongThich(sc);
         
         System.out.println("");
+        
+        TuongTacNguoiDung GUI = new TuongTacNguoiDung();
+        GUI.setVisible(true);
     }
 }
