@@ -1,0 +1,410 @@
+[
+    {
+        "sale": 0,
+        "des": "N/A",
+        "forSale": false,
+        "price": 10,
+        "name": "KB 1",
+        "icon": "iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAACtElEQVR4Xu3cS3LTQBDGcScga+Rj8NqxDGuKFVAcggtwAS7B6wRcIiuqUpVjsMqOKo5AHqbbGVHmizR+yc6U5v+r6k08ao27bUnRKJlMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGRoPp8fNU3zJYRwWtf1J319X3xfvk/ft89BXy+OFeHYCnJVhTDXsJ/f6PiheG6Pjn1e6dii2Cf0aaohFo90m115zlRDbE5PdJtSHGlBNKxA1zbuWDfcgX8jr3U/GjauvMOXFeanFqInLnTbbXmujvx3wuem245e1yGjL3TbbWnevtjn+StbVcYNqUpryGw2O+koQm/Yifa15tiU59C8qfA5ao7RskPCDy1AKmz8qebYlOfQvKnwOWqO0bI3e6kFSEW82trJOldXss9LzTFa9mb/aAFWhebYlOZbFT5HzTFaNCQzNCQzNCQznNQzY2/2TAuQinA/l71nmmO0mqZ5oQVIxX38Yuhz1ByjVnHrJC8h44b43HTb0Qvcfs/OOgtUg307Wp5T96MxKXGByvlyaWAJNy+phujYoaQaomOLxGNAmcmhGDnMAQAAAAAAAMAa/GZeFcJvv+1d1/UHff3Q4kMQfkv+osgbjVaAN0vrEB7fdcyh2L7PfQ6xITc+Nx0zel0LRG1zrCBvdfzQ4mrlogExDrI4liV7wy/7GrIc7Xj/8+nl7bfhOSym1oh3uh8NXzm0eK85Rs2K87Bqms9ajI7CePiS6y+LV5onZTqdPo8rke0afefS7X9hc7K5PdBcRdn0qcI2YoHbc1Ab/gzvncNQItrzxjOdV9HiuvpXKawWb5Dw3DG8oR91LpjcNmT5ctOa800LOVT4ZXY8p5R3ebsLL1gd//1G+6mORV11SFq8Hr9pi/NG+2QJTdgja9bjcHvF9i90DAAAAAAAAAAAKN5f8FwJ+5273+UAAAAASUVORK5CYII=",
+        "attributes": {},
+        "id": "TB00001",
+        "history": {"0": {
+            "action": "Device created",
+            "time": "30/11/2024"
+        }},
+        "type": "Key Board",
+        "brand": "Brand 1",
+        "info": {}
+    },
+    {
+        "sale": 0,
+        "des": "N/A",
+        "forSale": false,
+        "price": 15,
+        "name": "KB 2",
+        "icon": 0,
+        "attributes": {},
+        "id": "TB00002",
+        "history": {"0": {
+            "action": "Device created",
+            "time": "30/11/2024"
+        }},
+        "type": "Key Board",
+        "brand": "Brand 1",
+        "info": {}
+    },
+    {
+        "sale": 0,
+        "des": "N/A",
+        "forSale": false,
+        "price": 15,
+        "name": "Key 1",
+        "icon": 0,
+        "attributes": {},
+        "id": "TB00003",
+        "history": {"0": {
+            "action": "Device created",
+            "time": "30/11/2024"
+        }},
+        "type": "Key Board",
+        "brand": "Brand 1",
+        "info": {}
+    },
+    {
+        "sale": 0,
+        "des": "N/A",
+        "forSale": false,
+        "price": 20,
+        "name": "Key 2",
+        "icon": 0,
+        "attributes": {},
+        "id": "TB00004",
+        "history": {"0": {
+            "action": "Device created",
+            "time": "30/11/2024"
+        }},
+        "type": "Key Board",
+        "brand": "Brand 2",
+        "info": {}
+    },
+    {
+        "sale": 0,
+        "des": "N/A",
+        "forSale": false,
+        "price": 10,
+        "name": "Board 1",
+        "icon": 0,
+        "attributes": {},
+        "id": "TB00005",
+        "history": {"0": {
+            "action": "Device created",
+            "time": "30/11/2024"
+        }},
+        "type": "Key Board",
+        "brand": "Brand 2",
+        "info": {}
+    },
+    {
+        "sale": 0,
+        "des": "N/A",
+        "forSale": false,
+        "price": 20,
+        "name": "Board 2",
+        "icon": 0,
+        "attributes": {},
+        "id": "TB00006",
+        "history": {"0": {
+            "action": "Device created",
+            "time": "30/11/2024"
+        }},
+        "type": "Key Board",
+        "brand": "Brand 2",
+        "info": {}
+    },
+    {
+        "sale": 0,
+        "des": "N/A",
+        "forSale": false,
+        "price": 10,
+        "name": "Mouse 1",
+        "icon": 0,
+        "attributes": {},
+        "id": "TB00007",
+        "history": {"0": {
+            "action": "Device created",
+            "time": "30/11/2024"
+        }},
+        "type": "Mouse",
+        "brand": "Brand 1",
+        "info": {}
+    },
+    {
+        "sale": 0,
+        "des": "N/A",
+        "forSale": false,
+        "price": 20,
+        "name": "Mouse 2",
+        "icon": 0,
+        "attributes": {},
+        "id": "TB00008",
+        "history": {"0": {
+            "action": "Device created",
+            "time": "30/11/2024"
+        }},
+        "type": "Mouse",
+        "brand": "Brand 1",
+        "info": {}
+    },
+    {
+        "sale": 0,
+        "des": "N/A",
+        "forSale": false,
+        "price": 15,
+        "name": "Mouse 3",
+        "icon": 0,
+        "attributes": {},
+        "id": "TB00009",
+        "history": {"0": {
+            "action": "Device created",
+            "time": "30/11/2024"
+        }},
+        "type": "Mouse",
+        "brand": "Brand 2",
+        "info": {}
+    },
+    {
+        "sale": 0,
+        "des": "N/A",
+        "forSale": false,
+        "price": 15,
+        "name": "Mouse 4",
+        "icon": 0,
+        "attributes": {},
+        "id": "TB00010",
+        "history": {"0": {
+            "action": "Device created",
+            "time": "30/11/2024"
+        }},
+        "type": "Mouse",
+        "brand": "Brand 2",
+        "info": {}
+    },
+    {
+        "sale": 0,
+        "des": "N/A",
+        "forSale": false,
+        "price": 40,
+        "name": "Screen 1",
+        "icon": 0,
+        "attributes": {},
+        "id": "TB00011",
+        "history": {"0": {
+            "action": "Device created",
+            "time": "30/11/2024"
+        }},
+        "type": "Monitor",
+        "brand": "Brand 1",
+        "info": {}
+    },
+    {
+        "sale": 0,
+        "des": "N/A",
+        "forSale": false,
+        "price": 60,
+        "name": "Screen 2",
+        "icon": 0,
+        "attributes": {},
+        "id": "TB00012",
+        "history": {"0": {
+            "action": "Device created",
+            "time": "30/11/2024"
+        }},
+        "type": "Monitor",
+        "brand": "Brand 1",
+        "info": {}
+    },
+    {
+        "sale": 0,
+        "des": "N/A",
+        "forSale": false,
+        "price": 80,
+        "name": "Screen X1",
+        "icon": 0,
+        "attributes": {},
+        "id": "TB00013",
+        "history": {"0": {
+            "action": "Device created",
+            "time": "30/11/2024"
+        }},
+        "type": "Monitor",
+        "brand": "Brand 2",
+        "info": {}
+    },
+    {
+        "sale": 0,
+        "des": "N/A",
+        "forSale": false,
+        "price": 90,
+        "name": "Screen X2",
+        "icon": 0,
+        "attributes": {},
+        "id": "TB00014",
+        "history": {"0": {
+            "action": "Device created",
+            "time": "30/11/2024"
+        }},
+        "type": "Monitor",
+        "brand": "Brand 2",
+        "info": {}
+    },
+    {
+        "sale": 0,
+        "des": "N/A",
+        "forSale": false,
+        "price": 65,
+        "name": "Screen Z1",
+        "icon": 0,
+        "attributes": {},
+        "id": "TB00015",
+        "history": {"0": {
+            "action": "Device created",
+            "time": "30/11/2024"
+        }},
+        "type": "Monitor",
+        "brand": "Brand 1",
+        "info": {}
+    },
+    {
+        "sale": 0,
+        "des": "N/A",
+        "forSale": false,
+        "price": 85,
+        "name": "Screen Z2",
+        "icon": 0,
+        "attributes": {},
+        "id": "TB00016",
+        "history": {"0": {
+            "action": "Device created",
+            "time": "30/11/2024"
+        }},
+        "type": "Monitor",
+        "brand": "Brand 2",
+        "info": {}
+    },
+    {
+        "sale": 0,
+        "des": "N/A",
+        "forSale": false,
+        "price": 200,
+        "name": "Case i3",
+        "icon": 0,
+        "attributes": {},
+        "id": "TB00017",
+        "history": {"0": {
+            "action": "Device created",
+            "time": "30/11/2024"
+        }},
+        "type": "Case",
+        "brand": "Brand 1",
+        "info": {}
+    },
+    {
+        "sale": 0,
+        "des": "N/A",
+        "forSale": false,
+        "price": 220,
+        "name": "Case i3.1",
+        "icon": 0,
+        "attributes": {},
+        "id": "TB00018",
+        "history": {"0": {
+            "action": "Device created",
+            "time": "30/11/2024"
+        }},
+        "type": "Case",
+        "brand": "Brand 1",
+        "info": {}
+    },
+    {
+        "sale": 0,
+        "des": "N/A",
+        "forSale": false,
+        "price": 240,
+        "name": "Case i3.2",
+        "icon": 0,
+        "attributes": {},
+        "id": "TB00019",
+        "history": {"0": {
+            "action": "Device created",
+            "time": "30/11/2024"
+        }},
+        "type": "Case",
+        "brand": "Brand 1",
+        "info": {}
+    },
+    {
+        "sale": 0,
+        "des": "N/A",
+        "forSale": false,
+        "price": 250,
+        "name": "Case i3",
+        "icon": 0,
+        "attributes": {},
+        "id": "TB00020",
+        "history": {"0": {
+            "action": "Device created",
+            "time": "30/11/2024"
+        }},
+        "type": "Case",
+        "brand": "Brand 2",
+        "info": {}
+    },
+    {
+        "sale": 0,
+        "des": "N/A",
+        "forSale": false,
+        "price": 300,
+        "name": "Case i5",
+        "icon": 0,
+        "attributes": {},
+        "id": "TB00021",
+        "history": {"0": {
+            "action": "Device created",
+            "time": "30/11/2024"
+        }},
+        "type": "Case",
+        "brand": "Brand 1",
+        "info": {}
+    },
+    {
+        "sale": 0,
+        "des": "N/A",
+        "forSale": false,
+        "price": 320,
+        "name": "Case i5",
+        "icon": 0,
+        "attributes": {},
+        "id": "TB00022",
+        "history": {"0": {
+            "action": "Device created",
+            "time": "30/11/2024"
+        }},
+        "type": "Case",
+        "brand": "Brand 2",
+        "info": {}
+    },
+    {
+        "sale": 0,
+        "des": "N/A",
+        "forSale": false,
+        "price": 400,
+        "name": "Case i7",
+        "icon": 0,
+        "attributes": {},
+        "id": "TB00023",
+        "history": {"0": {
+            "action": "Device created",
+            "time": "30/11/2024"
+        }},
+        "type": "Case",
+        "brand": "Brand 1",
+        "info": {}
+    },
+    {
+        "sale": 0,
+        "des": "N/A",
+        "forSale": false,
+        "price": 500,
+        "name": "Case i7",
+        "icon": 0,
+        "attributes": {},
+        "id": "TB00024",
+        "history": {"0": {
+            "action": "Device created",
+            "time": "30/11/2024"
+        }},
+        "type": "Case",
+        "brand": "Brand 2",
+        "info": {}
+    }
+]

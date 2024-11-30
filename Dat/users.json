@@ -1,0 +1,65 @@
+[
+    {
+        "password": "A/AYFw+RQEdSLY1PMnhGpQ==:17TKcfZ25E5nmG5coThY63a8x8TYoTiMarw0xjp3aBY=",
+        "address": "Root-123",
+        "gender": "Other",
+        "balance": 0,
+        "name": "Root",
+        "birth": {
+            "month": 1,
+            "year": 1,
+            "day": 1
+        },
+        "admin": true,
+        "id": "ND00000",
+        "last_Name": "Root",
+        "history": {"0": {
+            "action": "Account created",
+            "time": "30/11/2024"
+        }},
+        "email": "root@gmail",
+        "username": "root"
+    },
+    {
+        "password": "VthHqkXExC8NSxEMgUZi/g==:+Vr47HjJ5TLsRxZMFNeXzk+sgXhNQ8FqZKOtQJsp9Vw=",
+        "address": "NS",
+        "gender": "Male",
+        "balance": 0,
+        "name": "Duy",
+        "birth": {
+            "month": 1,
+            "year": 1925,
+            "day": 1
+        },
+        "admin": false,
+        "id": "ND00001",
+        "last_Name": "NS",
+        "history": {"0": {
+            "action": "User register",
+            "time": "30/11/2024"
+        }},
+        "email": "duy123@gmail.com",
+        "username": "duy"
+    },
+    {
+        "password": "zC0LQqqFSfrb+WgmzsRVuA==:cpd5iPSQ+NvkX6YKWcWo7QFvnA2L9DQtDHw7VchppvE=",
+        "address": "The tester",
+        "gender": "Male",
+        "balance": 0,
+        "name": "Test",
+        "birth": {
+            "month": 1,
+            "year": 1925,
+            "day": 1
+        },
+        "admin": false,
+        "id": "ND00002",
+        "last_Name": "The tester",
+        "history": {"0": {
+            "action": "User register",
+            "time": "30/11/2024"
+        }},
+        "email": "test123@gmail.com",
+        "username": "test"
+    }
+]
