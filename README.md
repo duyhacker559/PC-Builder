@@ -12,7 +12,7 @@ Người dùng có thể tìm kiếm các sản phẩm điện tử ưa thích d
 ## Tính Năng
 Danh sách các tính năng chính:
 - ✅ Người dùng có thể build PC và tìm kiếm các thiết bị
-- ✅ Giao diện quản lí thân thiện, dễ dàng trong quản lí
+- ✅ Giao diện quản lí thân thiện, dễ sử dụng
 
 ## Cách Cài Đặt
 ### Yêu Cầu Hệ Thống
@@ -39,4 +39,5 @@ Danh sách các tính năng chính:
     Hoặc chạy file JAR:
     ```bash
     java -jar target/ten-file-dong-goi.jar
-
+## Phân tích
+https://1drv.ms/w/c/7f0a76b748277087/EY7GXsImjYZHvKTXl4yy30ABbdxXp0fL-DA3AKJy67FApA?e=UO4t1b
