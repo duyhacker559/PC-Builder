@@ -52,8 +52,8 @@ public class SearchItem extends javax.swing.JPanel {
         DeviceCost.setText("$"+device.get("price").toString());
         if (device.has("forSale")) {
             if (device.getBoolean("forSale")) {
-                float discount = Float.parseFloat(device.get("sale").toString())*Float.parseFloat(device.get("price").toString());
-                float discountPrice = Float.parseFloat(device.get("price").toString()) - discount;
+                double discount = Double.parseDouble(device.get("sale").toString())*Double.parseDouble(device.get("price").toString());
+                double discountPrice = Double.parseDouble(device.get("price").toString()) - discount;
                 DeviceDiscount.setText(String.format("$%.2f", discount));
                 DeviceCost.setText(String.format("$%.2f", discountPrice));
             }

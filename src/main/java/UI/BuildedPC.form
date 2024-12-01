@@ -104,7 +104,6 @@
           <Color id="Hand Cursor"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="opaque" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BuildPriceActionPerformed"/>

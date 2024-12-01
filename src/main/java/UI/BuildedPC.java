@@ -15,13 +15,13 @@ import pc_builder.DeviceStorage;
  */
 public class BuildedPC extends javax.swing.JPanel {
     private Home parent;
-    private float price;
+    private double price;
     /**
      * Creates new form BuildedPC
      */
     private ArrayList<String> devices;
     
-    public BuildedPC(Home parent, int index, float price, ArrayList<String> devices) {
+    public BuildedPC(Home parent, int index, double price, ArrayList<String> devices) {
         this.parent = parent;
         this.devices = devices;
         initComponents();

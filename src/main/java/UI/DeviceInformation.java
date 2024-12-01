@@ -51,10 +51,10 @@ public class DeviceInformation extends javax.swing.JFrame {
         this.setTitle("Information - "+data.getString("name"));
         DescriptionText.setText(data.getString("des"));
         
-        float price = data.getFloat("price");
+        double price = data.getDouble("price");
         if (data.has("forSale")) {
             if (data.getBoolean("forSale")) {
-                price = (1-data.getFloat("sale"))*price;
+                price = (1-data.getDouble("sale"))*price;
             }
         }
         PurchaseButton.setText(String.format("Get for $%.2f", price));

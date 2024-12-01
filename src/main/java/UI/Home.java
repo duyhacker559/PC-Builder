@@ -1459,13 +1459,13 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_NewPasswordTextFieldFocusLost
 
     public void purchase(JSONObject data) {
-        float price = data.getFloat("price");
+        double price = data.getDouble("price");
         if (data.has("forSale")) {
             if (data.getBoolean("forSale")) {
-                price = (1-data.getFloat("sale"))*price;
+                price = (1-data.getDouble("sale"))*price;
             }
         }
-        float userBalance = parent.currentUser.getFloat("balance");
+        double userBalance = parent.currentUser.getDouble("balance");
         if (userBalance<price) {
             showWarningDialog("Purchase failed!", "Your balance is not enough...");
         } else {
@@ -1487,8 +1487,8 @@ public class Home extends javax.swing.JFrame {
         }
     }
     
-    public void purchaseSets(ArrayList<String> devices, float price) {
-        float userBalance = parent.currentUser.getFloat("balance");
+    public void purchaseSets(ArrayList<String> devices, double price) {
+        double userBalance = parent.currentUser.getDouble("balance");
         if (userBalance<price) {
             showWarningDialog("Purchase failed!", "Your balance is not enough...");
         } else {
@@ -1502,10 +1502,10 @@ public class Home extends javax.swing.JFrame {
                 while (history.has(index+"")) {
                     index++;
                 }
-                float devicePrice = data.getFloat("price");
+                double devicePrice = data.getDouble("price");
                 if (data.has("forSale")) {
                     if (data.getBoolean("forSale")) {
-                        devicePrice = (1-data.getFloat("sale"))*devicePrice;
+                        devicePrice = (1-data.getDouble("sale"))*devicePrice;
                     }
                 }
                 JSONObject newRecord = new JSONObject();
@@ -1563,7 +1563,7 @@ public class Home extends javax.swing.JFrame {
         
         // load all devices json
         JSONArray devices = DeviceStorage.loadItems();
-        Boolean getAllBrand = (boolean) (FillBrand.getSelectedIndex()==0);
+        Boolean getAllBrand = (boolean) (FillBrand1.getSelectedIndex()==0);
         
         // list all necessary device into a list inside a map
         for (String i: pcBuildComponent) {
@@ -1584,24 +1584,24 @@ public class Home extends javax.swing.JFrame {
         
         class PCBuild implements Comparable<PCBuild> {
             public int [] component;
-            public float price = 0;
-            public float performance = 0;
+            public double price = 0;
+            public double performance = 0;
             public ArrayList<String> devices = new ArrayList<>();
             public PCBuild(int [] a) {
                 this.component = a;
                 
-                float totalPrice = 0;
+                double totalPrice = 0;
                 for (int j=0;j<component.length;j++) {
                     JSONObject item = getDevices.get(pcBuildComponent[j]).get(component[j]);
-                    float price = item.getFloat("price");
+                    double price = item.getDouble("price");
                     if (item.has("forSale")) {
                         if (item.getBoolean("forSale")) {
-                            price = (1-item.getFloat("sale"))*price;
+                            price = (1-item.getDouble("sale"))*price;
                         }
                     }
                     if (item.has("attributes")) {
                         if (item.getJSONObject("attributes").has("performance")) {
-                            this.performance += item.getJSONObject("attributes").getFloat("performance");
+                            this.performance += item.getJSONObject("attributes").getDouble("performance");
                         }
                     }
                     devices.add(item.getString("id"));
@@ -1621,10 +1621,10 @@ public class Home extends javax.swing.JFrame {
             public int compareTo(PCBuild o) {
                 int res = 0;
                 if (isCheapest) {
-                    res = Float.compare(price, o.price);
+                    res = Double.compare(price, o.price);
                 }
                 if (res == 0 && isPerformance) {
-                    res = Float.compare(o.performance, performance);
+                    res = Double.compare(o.performance, performance);
                 }
                 return res;
             }
@@ -1668,7 +1668,7 @@ public class Home extends javax.swing.JFrame {
         int counter = 0;
         int maxDisplay = Integer.parseInt(DisplayMax.getValue().toString());
         for (PCBuild i: res) {
-            if (i.price>=Float.parseFloat(FillMin1.getValue().toString()) && i.price<=Float.parseFloat(FillMax1.getValue().toString())) {
+            if (i.price>=Double.parseDouble(FillMin1.getValue().toString()) && i.price<=Double.parseDouble(FillMax1.getValue().toString())) {
                 //System.out.print("Price "+i.price+"  ");
                 //i.print();
                 counter++;

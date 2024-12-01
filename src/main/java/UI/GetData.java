@@ -725,7 +725,7 @@ public class GetData extends javax.swing.JDialog {
                 }
             } else if (selected == 2) {
                 try {
-                    value = Float.parseFloat(NumberField.getText());
+                    value = Double.parseDouble(NumberField.getText());
                 } catch (Exception e) {
                 }
             } else if (selected == 3) {
