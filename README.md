@@ -39,4 +39,5 @@ Danh sách các tính năng chính:
     Hoặc chạy file JAR:
     ```bash
     java -jar target/ten-file-dong-goi.jar
+## Phân tích
 
