@@ -1,4 +1,4 @@
-# Tên Dự Án
+# PC Builder v0.1
 PC Builder là một ứng dụng quản lí kiêm người dùng. Người dùng có thể tìm kiếm các sản phẩm điện tử ưa thích dựa trên loại hàng, nhãn hiệu,.. Ứng dụng còn tích hợp tính năng build PC giúp người dùng ra đưa ra quyết định nhanh hơn trong việc dựng một chiếc máy tính vừa hiệu suất với giá cả phải chăng.
 
 ## Mục Lục
