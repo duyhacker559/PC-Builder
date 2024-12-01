@@ -10,6 +10,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import java.lang.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import pc_builder.DeviceStorage;
@@ -110,10 +111,10 @@ public class Home extends javax.swing.JFrame {
         Main = new javax.swing.JPanel();
         HomePanel = new javax.swing.JPanel();
         HomePanelButtons = new javax.swing.JPanel();
-        NewsButton = new javax.swing.JButton();
         SaleButton = new javax.swing.JButton();
         SearchButton = new javax.swing.JButton();
         BuildButton = new javax.swing.JButton();
+        NewsButton = new javax.swing.JButton();
         HomePageIcon = new javax.swing.JPanel();
         HomaPageButton = new javax.swing.JButton();
         UserPanel = new javax.swing.JPanel();
@@ -205,12 +206,10 @@ public class Home extends javax.swing.JFrame {
         User_Delete_Page = new javax.swing.JPanel();
         Delete_User_Button = new javax.swing.JButton();
         ConfirmDeleteAcc = new javax.swing.JCheckBox();
-        User_Deposit_Page = new javax.swing.JPanel();
-        Delete_User_Button1 = new javax.swing.JButton();
-        ConfirmDeleteAcc1 = new javax.swing.JCheckBox();
         User_History_Page = new javax.swing.JPanel();
         Delete_User_Button2 = new javax.swing.JButton();
-        ConfirmDeleteAcc2 = new javax.swing.JCheckBox();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        HistoryTable = new javax.swing.JTable();
 
         ButtonGroupHomePage.add(NewsButton);
         ButtonGroupHomePage.add(SaleButton);
@@ -239,22 +238,6 @@ public class Home extends javax.swing.JFrame {
         java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.LEADING);
         flowLayout1.setAlignOnBaseline(true);
         HomePanelButtons.setLayout(flowLayout1);
-
-        NewsButton.setBackground(new java.awt.Color(153, 153, 255));
-        NewsButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        NewsButton.setForeground(new java.awt.Color(255, 255, 255));
-        NewsButton.setText("News");
-        NewsButton.setBorder(null);
-        NewsButton.setBorderPainted(false);
-        NewsButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        NewsButton.setFocusPainted(false);
-        NewsButton.setPreferredSize(new java.awt.Dimension(150, 50));
-        NewsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NewsButtonActionPerformed(evt);
-            }
-        });
-        HomePanelButtons.add(NewsButton);
 
         SaleButton.setBackground(new java.awt.Color(153, 153, 255));
         SaleButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -303,6 +286,23 @@ public class Home extends javax.swing.JFrame {
             }
         });
         HomePanelButtons.add(BuildButton);
+
+        NewsButton.setBackground(new java.awt.Color(153, 153, 255));
+        NewsButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        NewsButton.setForeground(new java.awt.Color(255, 255, 255));
+        NewsButton.setText("News");
+        NewsButton.setBorder(null);
+        NewsButton.setBorderPainted(false);
+        NewsButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        NewsButton.setEnabled(false);
+        NewsButton.setFocusPainted(false);
+        NewsButton.setPreferredSize(new java.awt.Dimension(150, 50));
+        NewsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NewsButtonActionPerformed(evt);
+            }
+        });
+        HomePanelButtons.add(NewsButton);
 
         HomePageIcon.setBackground(new java.awt.Color(153, 153, 255));
         HomePageIcon.setPreferredSize(new java.awt.Dimension(300, 65));
@@ -875,7 +875,7 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(NewTittle5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(SearchResult2, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
+                .addComponent(SearchResult2)
                 .addContainerGap())
         );
 
@@ -1012,7 +1012,7 @@ public class Home extends javax.swing.JFrame {
         jLabel7.setOpaque(true);
 
         User_Setting_List.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Main Setting", "Delete Account", "Deposit", "History" };
+            String[] strings = { "Main Setting", "Delete Account", "History" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -1205,59 +1205,49 @@ public class Home extends javax.swing.JFrame {
         NewData4.add(User_Delete_Page);
         User_Delete_Page.setBounds(0, 0, 875, 658);
 
-        User_Deposit_Page.setVisible(false);
-        User_Deposit_Page.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        Delete_User_Button1.setBackground(new java.awt.Color(102, 102, 255));
-        Delete_User_Button1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        Delete_User_Button1.setForeground(new java.awt.Color(255, 255, 255));
-        Delete_User_Button1.setText("Delete User Account");
-        Delete_User_Button1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Delete_User_Button1ActionPerformed(evt);
-            }
-        });
-
-        ConfirmDeleteAcc1.setText("Confirm Delete Account");
-
-        javax.swing.GroupLayout User_Deposit_PageLayout = new javax.swing.GroupLayout(User_Deposit_Page);
-        User_Deposit_Page.setLayout(User_Deposit_PageLayout);
-        User_Deposit_PageLayout.setHorizontalGroup(
-            User_Deposit_PageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(User_Deposit_PageLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(User_Deposit_PageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Delete_User_Button1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ConfirmDeleteAcc1))
-                .addContainerGap(640, Short.MAX_VALUE))
-        );
-        User_Deposit_PageLayout.setVerticalGroup(
-            User_Deposit_PageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(User_Deposit_PageLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(ConfirmDeleteAcc1)
-                .addGap(5, 5, 5)
-                .addComponent(Delete_User_Button1)
-                .addContainerGap(596, Short.MAX_VALUE))
-        );
-
-        NewData4.add(User_Deposit_Page);
-        User_Deposit_Page.setBounds(0, 0, 875, 658);
-
         User_History_Page.setVisible(false);
         User_History_Page.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         Delete_User_Button2.setBackground(new java.awt.Color(102, 102, 255));
         Delete_User_Button2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         Delete_User_Button2.setForeground(new java.awt.Color(255, 255, 255));
-        Delete_User_Button2.setText("Delete User Account");
+        Delete_User_Button2.setText("Load History");
         Delete_User_Button2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Delete_User_Button2ActionPerformed(evt);
             }
         });
 
-        ConfirmDeleteAcc2.setText("Confirm Delete Account");
+        HistoryTable.setBackground(new java.awt.Color(254, 254, 254));
+        HistoryTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Index", "Date", "Time", "Action"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        HistoryTable.getTableHeader().setReorderingAllowed(false);
+        jScrollPane4.setViewportView(HistoryTable);
+        if (HistoryTable.getColumnModel().getColumnCount() > 0) {
+            HistoryTable.getColumnModel().getColumn(0).setMinWidth(50);
+            HistoryTable.getColumnModel().getColumn(0).setPreferredWidth(50);
+            HistoryTable.getColumnModel().getColumn(0).setMaxWidth(50);
+            HistoryTable.getColumnModel().getColumn(1).setMinWidth(100);
+            HistoryTable.getColumnModel().getColumn(1).setPreferredWidth(100);
+            HistoryTable.getColumnModel().getColumn(1).setMaxWidth(100);
+            HistoryTable.getColumnModel().getColumn(2).setMinWidth(100);
+            HistoryTable.getColumnModel().getColumn(2).setPreferredWidth(100);
+            HistoryTable.getColumnModel().getColumn(2).setMaxWidth(100);
+        }
 
         javax.swing.GroupLayout User_History_PageLayout = new javax.swing.GroupLayout(User_History_Page);
         User_History_Page.setLayout(User_History_PageLayout);
@@ -1266,18 +1256,18 @@ public class Home extends javax.swing.JFrame {
             .addGroup(User_History_PageLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(User_History_PageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Delete_User_Button2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ConfirmDeleteAcc2))
-                .addContainerGap(640, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 824, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Delete_User_Button2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         User_History_PageLayout.setVerticalGroup(
             User_History_PageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(User_History_PageLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(ConfirmDeleteAcc2)
-                .addGap(5, 5, 5)
                 .addComponent(Delete_User_Button2)
-                .addContainerGap(596, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         NewData4.add(User_History_Page);
@@ -1418,7 +1408,7 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         User_Delete_Page.setVisible(false);
         User_MainSetting_Page.setVisible(false);
-        
+        User_History_Page.setVisible(false);
         int index = User_Setting_List.getSelectedIndex();
         if (index == 0) {
             User_MainSetting_Page.setVisible(true);
@@ -1426,7 +1416,10 @@ public class Home extends javax.swing.JFrame {
         } else if (index == 1) {
             User_Delete_Page.setVisible(true);
             User_Setting_Tittle.setText(User_Setting_List.getSelectedValue());
-        }
+        } else if (index == 2) {
+            User_History_Page.setVisible(true);
+            User_Setting_Tittle.setText(User_Setting_List.getSelectedValue());
+        } 
     }//GEN-LAST:event_User_Setting_ListValueChanged
 
     private void OldPasswordTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_OldPasswordTextFieldFocusLost
@@ -1489,6 +1482,38 @@ public class Home extends javax.swing.JFrame {
             newRecord.put("time", TimeHandler.getCurrentTime());
             newRecord.put("action", String.format("User purchase [%s:%s] for [%.2f]",data.getString("id"),data.getString("name"),price));
             history.put(index+"", newRecord);
+            UserStorage.updateItem(parent.currentUser.getString("username"), parent.currentUser);
+            updateBalance();
+        }
+    }
+    
+    public void purchaseSets(ArrayList<String> devices, float price) {
+        float userBalance = parent.currentUser.getFloat("balance");
+        if (userBalance<price) {
+            showWarningDialog("Purchase failed!", "Your balance is not enough...");
+        } else {
+            showWarningDialog("Purchase complete!",String.format("You purchased a set for $%.2f", price));
+            userBalance -= price;
+            for (String id: devices) {
+                JSONObject data = DeviceStorage.getItem(id);
+                parent.currentUser.put("balance", userBalance);
+                JSONObject history = parent.currentUser.getJSONObject("history");
+                int index = 1;
+                while (history.has(index+"")) {
+                    index++;
+                }
+                float devicePrice = data.getFloat("price");
+                if (data.has("forSale")) {
+                    if (data.getBoolean("forSale")) {
+                        devicePrice = (1-data.getFloat("sale"))*devicePrice;
+                    }
+                }
+                JSONObject newRecord = new JSONObject();
+                newRecord.put("date", TimeHandler.getCurrentDay());
+                newRecord.put("time", TimeHandler.getCurrentTime());
+                newRecord.put("action", String.format("User purchase [%s:%s] for [%.2f]",data.getString("id"),data.getString("name"),devicePrice));
+                history.put(index+"", newRecord);
+                }
             UserStorage.updateItem(parent.currentUser.getString("username"), parent.currentUser);
             updateBalance();
         }
@@ -1686,12 +1711,15 @@ public class Home extends javax.swing.JFrame {
         SearchContent.revalidate();
     }//GEN-LAST:event_SearchActionPerformed
 
-    private void Delete_User_Button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Delete_User_Button1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Delete_User_Button1ActionPerformed
-
     private void Delete_User_Button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Delete_User_Button2ActionPerformed
         // TODO add your handling code here:
+        DefaultTableModel tabelModel = (DefaultTableModel)HistoryTable.getModel();
+        tabelModel.setRowCount(0);
+        JSONObject historyObject = parent.currentUser.getJSONObject("history");
+        for (String key : historyObject.keySet()) {
+            String data[] = {key, historyObject.getJSONObject(key).getString("date"), historyObject.getJSONObject(key).getString("time"), historyObject.getJSONObject(key).getString("action")};
+            tabelModel.addRow(data);
+        }
     }//GEN-LAST:event_Delete_User_Button2ActionPerformed
 
     public void getSaleProduct() {
@@ -1760,11 +1788,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.ButtonGroup ButtonGroupHomePage;
     private javax.swing.JCheckBox CheapestBuild;
     private javax.swing.JCheckBox ConfirmDeleteAcc;
-    private javax.swing.JCheckBox ConfirmDeleteAcc1;
-    private javax.swing.JCheckBox ConfirmDeleteAcc2;
     private javax.swing.JPanel Content;
     private javax.swing.JButton Delete_User_Button;
-    private javax.swing.JButton Delete_User_Button1;
     private javax.swing.JButton Delete_User_Button2;
     private javax.swing.JSpinner DisplayMax;
     private javax.swing.JComboBox<String> FillBrand;
@@ -1775,6 +1800,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JSpinner FillMin1;
     private javax.swing.JTextField FillName;
     private javax.swing.JComboBox<String> FillType;
+    private javax.swing.JTable HistoryTable;
     private javax.swing.JButton HomaPageButton;
     private javax.swing.JLabel HomeHello;
     private javax.swing.JPanel HomePage;
@@ -1826,7 +1852,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel UserPage;
     private javax.swing.JPanel UserPanel;
     private javax.swing.JPanel User_Delete_Page;
-    private javax.swing.JPanel User_Deposit_Page;
     private javax.swing.JPanel User_History_Page;
     private javax.swing.JPanel User_MainSetting_Page;
     private javax.swing.JList<String> User_Setting_List;
@@ -1851,6 +1876,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JToggleButton jToggleButton1;

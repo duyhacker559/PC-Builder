@@ -13,8 +13,7 @@ public class Confirm extends javax.swing.JDialog {
     /**
      * Creates new form Confirm
      */
-    public Confirm(java.awt.Frame parent, boolean modal, String text) {
-        super(parent, modal);
+    public Confirm(Object parent, boolean modal, String text) {
         initComponents();
         this.jTextArea1.setText(text);
         this.parent = parent;
@@ -98,10 +97,14 @@ public class Confirm extends javax.swing.JDialog {
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
+        this.hide();
         if (parent instanceof Home) {
             
         } else if (parent instanceof DeviceInformation) {
             DeviceInformation getGUI = (DeviceInformation)parent;
+            getGUI.purchase();
+        } else if (parent instanceof BuildedPC) {
+            BuildedPC getGUI = (BuildedPC)parent;
             getGUI.purchase();
         }
         this.dispose();

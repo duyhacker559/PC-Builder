@@ -15,14 +15,17 @@ import pc_builder.DeviceStorage;
  */
 public class BuildedPC extends javax.swing.JPanel {
     private Home parent;
+    private float price;
     /**
      * Creates new form BuildedPC
      */
     private ArrayList<String> devices;
     
     public BuildedPC(Home parent, int index, float price, ArrayList<String> devices) {
+        this.parent = parent;
         this.devices = devices;
         initComponents();
+        this.price = price;
         IndexLabel.setText(String.format("Build %d:",index));
         BuildPrice.setText(String.format("$%.2f", price));
         
@@ -110,8 +113,14 @@ public class BuildedPC extends javax.swing.JPanel {
 
     private void BuildPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuildPriceActionPerformed
         // TODO add your handling code here:
+        Confirm newConfirm = new Confirm(this, true, "Are you sure you want to purchase this set?");
+        newConfirm.setLocationRelativeTo(null);
+        newConfirm.setVisible(true);
     }//GEN-LAST:event_BuildPriceActionPerformed
 
+    public void purchase() {
+        parent.purchaseSets(devices,price);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BuildPrice;
