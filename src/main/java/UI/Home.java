@@ -75,7 +75,7 @@ public class Home extends javax.swing.JFrame {
         for (Object i: types) {
             a.add((String)i);
         }
-        a.add("All");
+        a.add("-All");
         Collections.sort(a);
         deviceTypes = (Vector<String>) a.clone();
         FillType.setModel(new javax.swing.DefaultComboBoxModel<>(a));
@@ -85,7 +85,7 @@ public class Home extends javax.swing.JFrame {
         for (Object i: types) {
             a.add((String)i);
         }
-        a.add("All");
+        a.add("-All");
         Collections.sort(a);
         deviceBrands = (Vector<String>) a.clone();
         FillBrand.setModel(new javax.swing.DefaultComboBoxModel<>(a));
