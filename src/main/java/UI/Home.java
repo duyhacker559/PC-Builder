@@ -1599,8 +1599,10 @@ public class Home extends javax.swing.JFrame {
                             price = (1-item.getFloat("sale"))*price;
                         }
                     }
-                    if (item.has("performance")) {
-                        this.performance += item.getFloat("performance");
+                    if (item.has("attributes")) {
+                        if (item.getJSONObject("attributes").has("performance")) {
+                            this.performance += item.getJSONObject("attributes").getFloat("performance");
+                        }
                     }
                     devices.add(item.getString("id"));
                     totalPrice += price;
