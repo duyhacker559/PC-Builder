@@ -12,7 +12,7 @@ Người dùng có thể tìm kiếm các sản phẩm điện tử ưa thích d
 ## Tính Năng
 Danh sách các tính năng chính:
 - ✅ Người dùng có thể build PC và tìm kiếm các thiết bị
-- ✅ Giao diện quản lí thân thiện, dễ dàng trong quản lí
+- ✅ Giao diện quản lí thân thiện, dễ sử dụng
 
 ## Cách Cài Đặt
 ### Yêu Cầu Hệ Thống
