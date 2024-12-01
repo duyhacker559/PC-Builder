@@ -40,4 +40,4 @@ Danh sách các tính năng chính:
     ```bash
     java -jar target/ten-file-dong-goi.jar
 ## Phân tích
-
+https://1drv.ms/w/c/7f0a76b748277087/EY7GXsImjYZHvKTXl4yy30ABbdxXp0fL-DA3AKJy67FApA?e=UO4t1b
