@@ -15,10 +15,28 @@ Danh sách các tính năng chính:
 - ✅ Giao diện quản lí thân thiện, dễ dàng trong quản lí
 
 ## Cách Cài Đặt
-Hướng dẫn để thiết lập dự án. Bao gồm các lệnh cài đặt cần thiết.
-
 ### Yêu Cầu Hệ Thống
-- **Ngôn ngữ/Libraries**: Java, org.json
+- **Java**: JDK 8 trở lên.
+- **Maven**: 3.6+.
+- **Git**: Để tải mã nguồn.
 
 ### Cài Đặt
+1. Clone dự án:
+    ```bash
+    git clone https://github.com/username/repository-name.git
+    cd repository-name
+    ```
+
+2. Build dự án:
+    ```bash
+    mvn clean install
+    ```
+
+3. Chạy ứng dụng:
+    ```bash
+    mvn spring-boot:run
+    ```
+    Hoặc chạy file JAR:
+    ```bash
+    java -jar target/ten-file-dong-goi.jar
 
