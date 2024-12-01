@@ -42,6 +42,7 @@ public class BuildItem extends javax.swing.JPanel {
     
     public BuildItem(Home parent, JSONObject data) {
         initComponents();
+        this.parent = parent;
         device = data;
         Type.setText(data.getString("type"));
         Brand.setText(data.getString("brand"));

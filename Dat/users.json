@@ -24,7 +24,7 @@
         "password": "VthHqkXExC8NSxEMgUZi/g==:+Vr47HjJ5TLsRxZMFNeXzk+sgXhNQ8FqZKOtQJsp9Vw=",
         "address": "NS",
         "gender": "Male",
-        "balance": 0,
+        "balance": 9799,
         "name": "Duy",
         "birth": {
             "month": 1,
@@ -34,11 +34,18 @@
         "admin": false,
         "id": "ND00001",
         "last_Name": "NS",
-        "history": {"0": {
-            "date": "30/11/2024",
-            "action": "User register",
-            "time": "00:00:00"
-        }},
+        "history": {
+            "0": {
+                "date": "30/11/2024",
+                "action": "User register",
+                "time": "00:00:00"
+            },
+            "1": {
+                "date": "02/12/2024",
+                "action": "User purchase [TB00017:Case i3 9100F] for [200,00]",
+                "time": "06:57:56"
+            }
+        },
         "email": "duy123@gmail.com",
         "username": "duy"
     },
