@@ -24,7 +24,7 @@
         "password": "VthHqkXExC8NSxEMgUZi/g==:+Vr47HjJ5TLsRxZMFNeXzk+sgXhNQ8FqZKOtQJsp9Vw=",
         "address": "NS",
         "gender": "Male",
-        "balance": 0,
+        "balance": 84,
         "name": "Duy",
         "birth": {
             "month": 1,
@@ -34,10 +34,22 @@
         "admin": false,
         "id": "ND00001",
         "last_Name": "NS",
-        "history": {"0": {
-            "action": "User register",
-            "time": "30/11/2024"
-        }},
+        "history": {
+            "0": {
+                "action": "User register",
+                "time": "30/11/2024"
+            },
+            "1": {
+                "date": "01/12/2024",
+                "action": "User purchase [TB00001:KB 1] for [8,00]",
+                "time": "17:48:04"
+            },
+            "2": {
+                "date": "01/12/2024",
+                "action": "User purchase [TB00001:KB 1] for [8,00]",
+                "time": "17:49:30"
+            }
+        },
         "email": "duy123@gmail.com",
         "username": "duy"
     },

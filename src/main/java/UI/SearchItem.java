@@ -22,6 +22,7 @@ import org.json.JSONObject;
  */
 public class SearchItem extends javax.swing.JPanel {
     private JSONObject device;
+    private Home parent;
     /**
      * Creates new form SearchItem
      */
@@ -39,8 +40,9 @@ public class SearchItem extends javax.swing.JPanel {
         }
     }
     
-    public SearchItem(JSONObject device) {
+    public SearchItem(Home parent, JSONObject device) {
         this.device = device;
+        this.parent = parent;
         this.setLayout(null);
         
         initComponents();
@@ -48,7 +50,14 @@ public class SearchItem extends javax.swing.JPanel {
         DeviceName.setText(device.getString("name"));
         DeviceType.setText(device.getString("type")+"  |  "+device.getString("brand"));
         DeviceCost.setText("$"+device.get("price").toString());
-        
+        if (device.has("forSale")) {
+            if (device.getBoolean("forSale")) {
+                float discount = Float.parseFloat(device.get("sale").toString())*Float.parseFloat(device.get("price").toString());
+                float discountPrice = Float.parseFloat(device.get("price").toString()) - discount;
+                DeviceDiscount.setText(String.format("$%.2f", discount));
+                DeviceCost.setText(String.format("$%.2f", discountPrice));
+            }
+        }
         try {
             BufferedImage originalImage = getBufferedImageFromJson(device, "icon");
             BufferedImage resizedImage = new BufferedImage(50, 50, originalImage.getType());
@@ -68,6 +77,10 @@ public class SearchItem extends javax.swing.JPanel {
         }
     }
 
+    public void purchase() {
+        parent.purchase(device);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -80,13 +93,19 @@ public class SearchItem extends javax.swing.JPanel {
         Icon = new javax.swing.JPanel();
         DeviceName = new javax.swing.JButton();
         DeviceType = new javax.swing.JLabel();
+        DeviceDiscount = new javax.swing.JLabel();
         DeviceCost = new javax.swing.JLabel();
 
+        setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setFocusable(false);
-        setMaximumSize(new java.awt.Dimension(765, 62));
-        setPreferredSize(new java.awt.Dimension(877, 62));
+        setMaximumSize(new java.awt.Dimension(765, 70));
+        setMinimumSize(new java.awt.Dimension(765, 0));
+        setPreferredSize(new java.awt.Dimension(877, 75));
+        setLayout(null);
 
         Icon.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        Icon.setMaximumSize(new java.awt.Dimension(50, 50));
+        Icon.setMinimumSize(new java.awt.Dimension(50, 50));
 
         javax.swing.GroupLayout IconLayout = new javax.swing.GroupLayout(Icon);
         Icon.setLayout(IconLayout);
@@ -99,57 +118,60 @@ public class SearchItem extends javax.swing.JPanel {
             .addGap(0, 46, Short.MAX_VALUE)
         );
 
+        add(Icon);
+        Icon.setBounds(21, 9, 50, 50);
+
         DeviceName.setBackground(new java.awt.Color(242, 242, 242));
-        DeviceName.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        DeviceName.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         DeviceName.setForeground(new java.awt.Color(0, 51, 204));
         DeviceName.setText("Device Name");
         DeviceName.setBorder(null);
+        DeviceName.setContentAreaFilled(false);
+        DeviceName.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         DeviceName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         DeviceName.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        DeviceName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeviceNameActionPerformed(evt);
+            }
+        });
+        add(DeviceName);
+        DeviceName.setBounds(77, 9, 573, 24);
 
+        DeviceType.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         DeviceType.setForeground(new java.awt.Color(102, 0, 51));
+        DeviceType.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         DeviceType.setText("Some tittle");
+        DeviceType.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        add(DeviceType);
+        DeviceType.setBounds(77, 39, 461, 20);
 
-        DeviceCost.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        DeviceDiscount.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        DeviceDiscount.setForeground(new java.awt.Color(204, 102, 0));
+        DeviceDiscount.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        add(DeviceDiscount);
+        DeviceDiscount.setBounds(630, 9, 100, 30);
+
+        DeviceCost.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         DeviceCost.setForeground(new java.awt.Color(0, 204, 51));
         DeviceCost.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         DeviceCost.setText("$10-$200");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Icon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(DeviceType, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
-                        .addComponent(DeviceCost, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(DeviceName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(DeviceName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(DeviceType)
-                            .addComponent(DeviceCost)))
-                    .addComponent(Icon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        DeviceCost.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        add(DeviceCost);
+        DeviceCost.setBounds(600, 39, 131, 24);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void DeviceNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeviceNameActionPerformed
+        // TODO add your handling code here:
+        DeviceInformation newInfo = new DeviceInformation(parent, device);
+        newInfo.setLocationRelativeTo(null);
+        newInfo.setVisible(true);
+    }//GEN-LAST:event_DeviceNameActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel DeviceCost;
+    private javax.swing.JLabel DeviceDiscount;
     private javax.swing.JButton DeviceName;
     private javax.swing.JLabel DeviceType;
     private javax.swing.JPanel Icon;

@@ -52,7 +52,8 @@ public class DeviceStorage {
         sample.put("history", new JSONObject(){{
             this.put("0", new JSONObject(){{
                 this.put("action", "Device created");
-                this.put("time", TimeHandler.getCurrentDay());
+                this.put("date", TimeHandler.getCurrentDay());
+                this.put("time", TimeHandler.getCurrentTime());
             }});
         }});
         

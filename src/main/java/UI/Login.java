@@ -196,6 +196,7 @@ public class Login extends javax.swing.JFrame {
         SignUpButton2.setForeground(new java.awt.Color(51, 51, 255));
         SignUpButton2.setText("Login");
         SignUpButton2.setBorder(null);
+        SignUpButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         SignUpButton2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         SignUpButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,6 +211,7 @@ public class Login extends javax.swing.JFrame {
         NextButton3.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         NextButton3.setForeground(new java.awt.Color(255, 255, 255));
         NextButton3.setText("Register");
+        NextButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         NextButton3.setFocusPainted(false);
         NextButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,6 +223,7 @@ public class Login extends javax.swing.JFrame {
         BackButton.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         BackButton.setForeground(new java.awt.Color(255, 255, 255));
         BackButton.setText("Back");
+        BackButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BackButtonActionPerformed(evt);
@@ -384,6 +387,7 @@ public class Login extends javax.swing.JFrame {
         LoginButton.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         LoginButton.setForeground(new java.awt.Color(255, 255, 255));
         LoginButton.setText("Login");
+        LoginButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         LoginButton.setFocusPainted(false);
         LoginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -399,6 +403,7 @@ public class Login extends javax.swing.JFrame {
         SignUpButton.setForeground(new java.awt.Color(51, 51, 255));
         SignUpButton.setText("Sign Up");
         SignUpButton.setBorder(null);
+        SignUpButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         SignUpButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         SignUpButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -492,6 +497,7 @@ public class Login extends javax.swing.JFrame {
         NextButton1.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         NextButton1.setForeground(new java.awt.Color(255, 255, 255));
         NextButton1.setText("Next");
+        NextButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         NextButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NextButton1ActionPerformed(evt);
@@ -506,6 +512,7 @@ public class Login extends javax.swing.JFrame {
         SignUpButton1.setForeground(new java.awt.Color(51, 51, 255));
         SignUpButton1.setText("Login");
         SignUpButton1.setBorder(null);
+        SignUpButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         SignUpButton1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         SignUpButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

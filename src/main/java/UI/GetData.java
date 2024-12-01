@@ -390,7 +390,7 @@ public class GetData extends javax.swing.JDialog {
         );
 
         Main.add(ImagePanel);
-        ImagePanel.setBounds(0, 10, 385, 210);
+        ImagePanel.setBounds(0, 10, 400, 210);
 
         StringPanel.setVisible(false);
 

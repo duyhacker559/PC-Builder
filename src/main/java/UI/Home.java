@@ -4,6 +4,7 @@
  */
 package UI;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
@@ -14,16 +15,53 @@ import org.json.JSONObject;
 import pc_builder.DeviceStorage;
 import pc_builder.UserStorage;
 import pc_builder.DeviceStorage;
+import pc_builder.TimeHandler;
 
 /**
  *
  * @author Admin
  */
+
+
 public class Home extends javax.swing.JFrame {
     Login parent;
+    Vector<String> deviceTypes = new Vector<>();
+    Vector<String> deviceBrands = new Vector<>();
     /**
      * Creates new form Home
      */
+    
+    private static void showWarningDialog(String title, String message) {
+        JDialog dialog = new JDialog();
+        dialog.setTitle(title);
+        dialog.setModal(true);
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
+        // Message panel
+        JPanel panel = new JPanel(new BorderLayout(10, 10));
+        panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        // Add an icon and the message
+        JLabel iconLabel = new JLabel(UIManager.getIcon("OptionPane.warningIcon"));
+        JLabel messageLabel = new JLabel(message);
+
+        panel.add(iconLabel, BorderLayout.WEST);
+        panel.add(messageLabel, BorderLayout.CENTER);
+
+        // Button to close the dialog
+        JButton closeButton = new JButton("OK");
+        closeButton.addActionListener(e -> dialog.dispose());
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(closeButton);
+
+        panel.add(buttonPanel, BorderLayout.SOUTH);
+
+        
+        dialog.add(panel);
+        dialog.pack();
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+    }
     
     public Home(Login parent) {
         initComponents();
@@ -38,6 +76,7 @@ public class Home extends javax.swing.JFrame {
         }
         a.add("All");
         Collections.sort(a);
+        deviceTypes = (Vector<String>) a.clone();
         FillType.setModel(new javax.swing.DefaultComboBoxModel<>(a));
         
         types = DeviceStorage.getDistinctValue("brand");
@@ -47,7 +86,9 @@ public class Home extends javax.swing.JFrame {
         }
         a.add("All");
         Collections.sort(a);
+        deviceBrands = (Vector<String>) a.clone();
         FillBrand.setModel(new javax.swing.DefaultComboBoxModel<>(a));
+        FillBrand1.setModel(new javax.swing.DefaultComboBoxModel<>(a));
         updateBalance();
         getSaleProduct();
     }
@@ -124,7 +165,7 @@ public class Home extends javax.swing.JFrame {
         NewContent6 = new javax.swing.JPanel();
         NewTittle5 = new javax.swing.JLabel();
         SearchResult2 = new javax.swing.JScrollPane();
-        SearchContent2 = new javax.swing.JPanel();
+        BuildContent = new javax.swing.JPanel();
         NewsPanel5 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -133,7 +174,11 @@ public class Home extends javax.swing.JFrame {
         FillMax1 = new javax.swing.JSpinner();
         jLabel17 = new javax.swing.JLabel();
         FillMin1 = new javax.swing.JSpinner();
-        Search1 = new javax.swing.JButton();
+        BuildPC = new javax.swing.JButton();
+        jLabel18 = new javax.swing.JLabel();
+        DisplayMax = new javax.swing.JSpinner();
+        CheapestBuild = new javax.swing.JCheckBox();
+        PerformanceBuild = new javax.swing.JCheckBox();
         UserPage = new javax.swing.JPanel();
         NewsPanel4 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -160,6 +205,12 @@ public class Home extends javax.swing.JFrame {
         User_Delete_Page = new javax.swing.JPanel();
         Delete_User_Button = new javax.swing.JButton();
         ConfirmDeleteAcc = new javax.swing.JCheckBox();
+        User_Deposit_Page = new javax.swing.JPanel();
+        Delete_User_Button1 = new javax.swing.JButton();
+        ConfirmDeleteAcc1 = new javax.swing.JCheckBox();
+        User_History_Page = new javax.swing.JPanel();
+        Delete_User_Button2 = new javax.swing.JButton();
+        ConfirmDeleteAcc2 = new javax.swing.JCheckBox();
 
         ButtonGroupHomePage.add(NewsButton);
         ButtonGroupHomePage.add(SaleButton);
@@ -728,6 +779,7 @@ public class Home extends javax.swing.JFrame {
         NewTittle6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         NewTittle6.setOpaque(true);
 
+        jScrollPane3.getVerticalScrollBar().setUnitIncrement(10);
         jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         SearchContent.setBackground(new java.awt.Color(221, 221, 221));
@@ -796,14 +848,15 @@ public class Home extends javax.swing.JFrame {
         NewTittle5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         NewTittle5.setOpaque(true);
 
-        SearchResult2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        SearchResult2.getVerticalScrollBar().setUnitIncrement(10);
+        SearchResult2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         SearchResult2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-        SearchContent2.setBackground(new java.awt.Color(232, 232, 232));
-        SearchContent2.setFocusable(false);
-        SearchContent2.setPreferredSize(new java.awt.Dimension(800, 658));
-        SearchContent2.setLayout(new javax.swing.BoxLayout(SearchContent2, javax.swing.BoxLayout.PAGE_AXIS));
-        SearchResult2.setViewportView(SearchContent2);
+        BuildContent.setBackground(new java.awt.Color(232, 232, 232));
+        BuildContent.setFocusable(false);
+        BuildContent.setPreferredSize(new java.awt.Dimension(800, 658));
+        BuildContent.setLayout(new javax.swing.BoxLayout(BuildContent, javax.swing.BoxLayout.PAGE_AXIS));
+        SearchResult2.setViewportView(BuildContent);
 
         javax.swing.GroupLayout NewContent6Layout = new javax.swing.GroupLayout(NewContent6);
         NewContent6.setLayout(NewContent6Layout);
@@ -843,14 +896,22 @@ public class Home extends javax.swing.JFrame {
 
         FillMax1.setValue(Integer.MAX_VALUE);
 
-        jLabel17.setText("Min:");
+        jLabel17.setText("Display Max:");
 
-        Search1.setText("Build PC");
-        Search1.addActionListener(new java.awt.event.ActionListener() {
+        BuildPC.setText("Build PC");
+        BuildPC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Search1ActionPerformed(evt);
+                BuildPCActionPerformed(evt);
             }
         });
+
+        jLabel18.setText("Min:");
+
+        DisplayMax.setValue(10);
+
+        CheapestBuild.setText("Cheapest");
+
+        PerformanceBuild.setText("Best performance");
 
         javax.swing.GroupLayout NewsPanel5Layout = new javax.swing.GroupLayout(NewsPanel5);
         NewsPanel5.setLayout(NewsPanel5Layout);
@@ -859,7 +920,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(NewsPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(NewsPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Search1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BuildPC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(NewsPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -870,9 +931,19 @@ public class Home extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(FillBrand1, 0, 217, Short.MAX_VALUE))
                     .addGroup(NewsPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(FillMin1)))
+                        .addComponent(FillMin1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NewsPanel5Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(DisplayMax, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(NewsPanel5Layout.createSequentialGroup()
+                        .addGroup(NewsPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(PerformanceBuild)
+                            .addComponent(CheapestBuild))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         NewsPanel5Layout.setVerticalGroup(
@@ -890,10 +961,18 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(FillMax1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(NewsPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(FillMin1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CheapestBuild, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(PerformanceBuild)
+                .addGap(34, 34, 34)
+                .addGroup(NewsPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(FillMin1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Search1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DisplayMax, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BuildPC, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -933,7 +1012,7 @@ public class Home extends javax.swing.JFrame {
         jLabel7.setOpaque(true);
 
         User_Setting_List.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Main Setting", "Delete Account" };
+            String[] strings = { "Main Setting", "Delete Account", "Deposit", "History" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -1126,6 +1205,84 @@ public class Home extends javax.swing.JFrame {
         NewData4.add(User_Delete_Page);
         User_Delete_Page.setBounds(0, 0, 875, 658);
 
+        User_Deposit_Page.setVisible(false);
+        User_Deposit_Page.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        Delete_User_Button1.setBackground(new java.awt.Color(102, 102, 255));
+        Delete_User_Button1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Delete_User_Button1.setForeground(new java.awt.Color(255, 255, 255));
+        Delete_User_Button1.setText("Delete User Account");
+        Delete_User_Button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Delete_User_Button1ActionPerformed(evt);
+            }
+        });
+
+        ConfirmDeleteAcc1.setText("Confirm Delete Account");
+
+        javax.swing.GroupLayout User_Deposit_PageLayout = new javax.swing.GroupLayout(User_Deposit_Page);
+        User_Deposit_Page.setLayout(User_Deposit_PageLayout);
+        User_Deposit_PageLayout.setHorizontalGroup(
+            User_Deposit_PageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(User_Deposit_PageLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(User_Deposit_PageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Delete_User_Button1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ConfirmDeleteAcc1))
+                .addContainerGap(640, Short.MAX_VALUE))
+        );
+        User_Deposit_PageLayout.setVerticalGroup(
+            User_Deposit_PageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(User_Deposit_PageLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ConfirmDeleteAcc1)
+                .addGap(5, 5, 5)
+                .addComponent(Delete_User_Button1)
+                .addContainerGap(596, Short.MAX_VALUE))
+        );
+
+        NewData4.add(User_Deposit_Page);
+        User_Deposit_Page.setBounds(0, 0, 875, 658);
+
+        User_History_Page.setVisible(false);
+        User_History_Page.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        Delete_User_Button2.setBackground(new java.awt.Color(102, 102, 255));
+        Delete_User_Button2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Delete_User_Button2.setForeground(new java.awt.Color(255, 255, 255));
+        Delete_User_Button2.setText("Delete User Account");
+        Delete_User_Button2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Delete_User_Button2ActionPerformed(evt);
+            }
+        });
+
+        ConfirmDeleteAcc2.setText("Confirm Delete Account");
+
+        javax.swing.GroupLayout User_History_PageLayout = new javax.swing.GroupLayout(User_History_Page);
+        User_History_Page.setLayout(User_History_PageLayout);
+        User_History_PageLayout.setHorizontalGroup(
+            User_History_PageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(User_History_PageLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(User_History_PageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Delete_User_Button2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ConfirmDeleteAcc2))
+                .addContainerGap(640, Short.MAX_VALUE))
+        );
+        User_History_PageLayout.setVerticalGroup(
+            User_History_PageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(User_History_PageLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ConfirmDeleteAcc2)
+                .addGap(5, 5, 5)
+                .addComponent(Delete_User_Button2)
+                .addContainerGap(596, Short.MAX_VALUE))
+        );
+
+        NewData4.add(User_History_Page);
+        User_History_Page.setBounds(0, 0, 875, 658);
+
         javax.swing.GroupLayout NewContent4Layout = new javax.swing.GroupLayout(NewContent4);
         NewContent4.setLayout(NewContent4Layout);
         NewContent4Layout.setHorizontalGroup(
@@ -1261,6 +1418,7 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         User_Delete_Page.setVisible(false);
         User_MainSetting_Page.setVisible(false);
+        
         int index = User_Setting_List.getSelectedIndex();
         if (index == 0) {
             User_MainSetting_Page.setVisible(true);
@@ -1307,6 +1465,35 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_NewPasswordTextFieldFocusLost
 
+    public void purchase(JSONObject data) {
+        float price = data.getFloat("price");
+        if (data.has("forSale")) {
+            if (data.getBoolean("forSale")) {
+                price = (1-data.getFloat("sale"))*price;
+            }
+        }
+        float userBalance = parent.currentUser.getFloat("balance");
+        if (userBalance<price) {
+            showWarningDialog("Purchase failed!", "Your balance is not enough...");
+        } else {
+            showWarningDialog("Purchase complete!",String.format("You purchased a %s for $%.2f", data.getString("name"), price));
+            userBalance -= price;
+            parent.currentUser.put("balance", userBalance);
+            JSONObject history = parent.currentUser.getJSONObject("history");
+            int index = 1;
+            while (history.has(index+"")) {
+                index++;
+            }
+            JSONObject newRecord = new JSONObject();
+            newRecord.put("date", TimeHandler.getCurrentDay());
+            newRecord.put("time", TimeHandler.getCurrentTime());
+            newRecord.put("action", String.format("User purchase [%s:%s] for [%.2f]",data.getString("id"),data.getString("name"),price));
+            history.put(index+"", newRecord);
+            UserStorage.updateItem(parent.currentUser.getString("username"), parent.currentUser);
+            updateBalance();
+        }
+    }
+    
     private void ApplyNewPasswordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApplyNewPasswordButtonActionPerformed
         try {
             // TODO add your handling code here:
@@ -1336,9 +1523,139 @@ public class Home extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ApplyNewPasswordButtonActionPerformed
 
-    private void Search1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Search1ActionPerformed
+    private void BuildPCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuildPCActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Search1ActionPerformed
+        BuildContent.removeAll();
+        String pcBuildComponent[] = {"Case","Monitor","Key Board","Mouse"}; 
+        TreeMap<String, Boolean> check = new TreeMap<>();
+        TreeMap<String, ArrayList<JSONObject>> getDevices = new TreeMap<>();
+        for (String i: deviceTypes) {
+            check.put(i, false);
+        }
+        for (String i: pcBuildComponent) {
+            check.put(i, true);
+        }
+        
+        // load all devices json
+        JSONArray devices = DeviceStorage.loadItems();
+        Boolean getAllBrand = (boolean) (FillBrand.getSelectedIndex()==0);
+        
+        // list all necessary device into a list inside a map
+        for (String i: pcBuildComponent) {
+            getDevices.put(i, new ArrayList<>());
+        }
+        for (int i = 0; i < devices.length(); i++) {
+            JSONObject item = devices.getJSONObject(i);
+            if (check.get((String)item.get("type"))) {
+                if (getAllBrand || FillBrand1.getSelectedItem().toString().compareTo((String)item.get("brand"))==0) {
+                    getDevices.get((String)item.get("type")).add(item);
+                }
+            }
+        }
+        
+        // Generate algorithm
+        boolean isCheapest = CheapestBuild.isSelected();
+        boolean isPerformance = PerformanceBuild.isSelected();
+        
+        class PCBuild implements Comparable<PCBuild> {
+            public int [] component;
+            public float price = 0;
+            public float performance = 0;
+            public ArrayList<String> devices = new ArrayList<>();
+            public PCBuild(int [] a) {
+                this.component = a;
+                
+                float totalPrice = 0;
+                for (int j=0;j<component.length;j++) {
+                    JSONObject item = getDevices.get(pcBuildComponent[j]).get(component[j]);
+                    float price = item.getFloat("price");
+                    if (item.has("forSale")) {
+                        if (item.getBoolean("forSale")) {
+                            price = (1-item.getFloat("sale"))*price;
+                        }
+                    }
+                    if (item.has("performance")) {
+                        this.performance += item.getFloat("performance");
+                    }
+                    devices.add(item.getString("id"));
+                    totalPrice += price;
+                }
+                this.price = totalPrice;
+            }
+            
+            public void print() {
+                for (int i = 0; i < component.length; i++) {
+                    System.out.print(pcBuildComponent[i]+":"+getDevices.get(pcBuildComponent[i]).get(component[i]).getString("name")+" ");
+                }
+                System.out.println("");
+            }
+ 
+            @Override
+            public int compareTo(PCBuild o) {
+                int res = 0;
+                if (isCheapest) {
+                    res = Float.compare(price, o.price);
+                }
+                if (res == 0 && isPerformance) {
+                    res = Float.compare(o.performance, performance);
+                }
+                return res;
+            }
+        }
+        
+        boolean flag = true;
+        int[] sinh = new int[pcBuildComponent.length];
+        int pointer = 0;
+        int l = sinh.length;
+        ArrayList<PCBuild> res = new ArrayList<>();
+        for (int key = 0; key < pcBuildComponent.length; key++) {
+            ArrayList<JSONObject> i = getDevices.get(pcBuildComponent[key]);
+            System.out.print(pcBuildComponent[key]+":");
+            for (JSONObject j: i) {
+                System.out.print(j.get("name")+" ");
+            }
+            System.out.print(" ("+i.size()+")");
+            System.out.println("");
+        }
+        
+        while (flag) {
+            res.add(new PCBuild(sinh.clone()));
+            pointer = 0;
+            sinh[pointer]++;
+            if (sinh[pointer]>=getDevices.get(pcBuildComponent[pointer]).size()) {
+                while (sinh[pointer]>=getDevices.get(pcBuildComponent[pointer]).size()) {
+                    sinh[pointer] = 0;
+                    pointer++;
+                    if (pointer >= l) {
+                        flag = false;
+                        break;
+                    }
+                    sinh[pointer]++;
+                }
+            }
+        } 
+        
+        Collections.sort(res);
+        // Create item frame
+        
+        int counter = 0;
+        int maxDisplay = Integer.parseInt(DisplayMax.getValue().toString());
+        for (PCBuild i: res) {
+            if (i.price>=Float.parseFloat(FillMin1.getValue().toString()) && i.price<=Float.parseFloat(FillMax1.getValue().toString())) {
+                //System.out.print("Price "+i.price+"  ");
+                //i.print();
+                counter++;
+                BuildedPC item = new BuildedPC(this,counter,i.price,i.devices);
+                item.setVisible(true);
+                BuildContent.add(item);
+            }
+            if (counter>=maxDisplay) {
+                break;
+            }
+        }
+        BuildContent.setPreferredSize(new Dimension(800,240*counter));
+        BuildContent.revalidate();
+    }//GEN-LAST:event_BuildPCActionPerformed
 
     private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
         // TODO add your handling code here:
@@ -1360,13 +1677,22 @@ public class Home extends javax.swing.JFrame {
             }
         });
         for (JSONObject i: a) {
-            SearchItem item = new SearchItem(i);
+            SearchItem item = new SearchItem(this, i);
             item.setVisible(true);
             SearchContent.add(item);
         }
         SearchContent.setPreferredSize(new Dimension(800,80*a.size()));
         SearchButton.transferFocus();
+        SearchContent.revalidate();
     }//GEN-LAST:event_SearchActionPerformed
+
+    private void Delete_User_Button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Delete_User_Button1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Delete_User_Button1ActionPerformed
+
+    private void Delete_User_Button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Delete_User_Button2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Delete_User_Button2ActionPerformed
 
     public void getSaleProduct() {
         SearchContent1.removeAll();
@@ -1387,7 +1713,7 @@ public class Home extends javax.swing.JFrame {
             }
         });
         for (JSONObject i: a) {
-            SearchItem item = new SearchItem(i);
+            SearchItem item = new SearchItem(this, i);
             item.setVisible(true);
             SearchContent1.add(item);
         }
@@ -1428,11 +1754,19 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton ApplyNewPasswordButton;
     private javax.swing.JLabel ApplyNewPasswordWarning;
     private javax.swing.JButton BuildButton;
+    private javax.swing.JPanel BuildContent;
+    private javax.swing.JButton BuildPC;
     private javax.swing.JPanel BuildPage;
     private javax.swing.ButtonGroup ButtonGroupHomePage;
+    private javax.swing.JCheckBox CheapestBuild;
     private javax.swing.JCheckBox ConfirmDeleteAcc;
+    private javax.swing.JCheckBox ConfirmDeleteAcc1;
+    private javax.swing.JCheckBox ConfirmDeleteAcc2;
     private javax.swing.JPanel Content;
     private javax.swing.JButton Delete_User_Button;
+    private javax.swing.JButton Delete_User_Button1;
+    private javax.swing.JButton Delete_User_Button2;
+    private javax.swing.JSpinner DisplayMax;
     private javax.swing.JComboBox<String> FillBrand;
     private javax.swing.JComboBox<String> FillBrand1;
     private javax.swing.JSpinner FillMax;
@@ -1475,17 +1809,16 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel OldPasswordLabel;
     private javax.swing.JPasswordField OldPasswordTextField;
     private javax.swing.JLabel OldPasswordWarning;
+    private javax.swing.JCheckBox PerformanceBuild;
     private javax.swing.JLabel ReNewPasswordLabel;
     private javax.swing.JPasswordField ReNewPasswordTextField;
     private javax.swing.JLabel ReNewPasswordWarning;
     private javax.swing.JButton SaleButton;
     private javax.swing.JPanel SalePage;
     private javax.swing.JButton Search;
-    private javax.swing.JButton Search1;
     private javax.swing.JButton SearchButton;
     private javax.swing.JPanel SearchContent;
     private javax.swing.JPanel SearchContent1;
-    private javax.swing.JPanel SearchContent2;
     private javax.swing.JPanel SearchPage;
     private javax.swing.JScrollPane SearchResult1;
     private javax.swing.JScrollPane SearchResult2;
@@ -1493,6 +1826,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel UserPage;
     private javax.swing.JPanel UserPanel;
     private javax.swing.JPanel User_Delete_Page;
+    private javax.swing.JPanel User_Deposit_Page;
+    private javax.swing.JPanel User_History_Page;
     private javax.swing.JPanel User_MainSetting_Page;
     private javax.swing.JList<String> User_Setting_List;
     private javax.swing.JLabel User_Setting_Tittle;
@@ -1504,6 +1839,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1519,4 +1855,5 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
+
 }

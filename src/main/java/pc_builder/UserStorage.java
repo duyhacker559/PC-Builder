@@ -41,7 +41,8 @@ public class UserStorage{
         sample.put("history", new JSONObject(){{
             this.put("0", new JSONObject(){{
                 this.put("action", "Account created");
-                this.put("time", TimeHandler.getCurrentDay());
+                this.put("date", TimeHandler.getCurrentDay());
+                this.put("time", TimeHandler.getCurrentTime());
             }});
         }});
         
