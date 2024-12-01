@@ -5,24 +5,20 @@ PC Builder là một ứng dụng quản lí kiêm người dùng. Người dùn
 - [Giới Thiệu](#giới-thiệu)
 - [Tính Năng](#tính-năng)
 - [Cách Cài Đặt](#cách-cài-đặt)
-- [Hướng Dẫn Sử Dụng](#hướng-dẫn-sử-dụng)
-- [Đóng Góp](#đóng-góp)
-- [Thông Tin Liên Hệ](#thông-tin-liên-hệ)
 
 ## Giới Thiệu
 Một phần mô tả chi tiết hơn về dự án. Giải thích vấn đề mà dự án giải quyết, đối tượng sử dụng và mục tiêu.
 
 ## Tính Năng
 Danh sách các tính năng chính:
-- ✅ Tính năng 1
-- ✅ Tính năng 2
-- ✅ Tính năng 3
+- ✅ Người dùng có thể build PC và tìm kiếm các thiết bị
+- ✅ Giao diện quản lí thân thiện, dễ dàng trong quản lí
 
 ## Cách Cài Đặt
 Hướng dẫn để thiết lập dự án. Bao gồm các lệnh cài đặt cần thiết.
 
 ### Yêu Cầu Hệ Thống
-- **Ngôn ngữ/Libraries**: Java
-- **Phụ thuộc**: org.json
+- **Ngôn ngữ/Libraries**: Java, org.json
 
 ### Cài Đặt
+
