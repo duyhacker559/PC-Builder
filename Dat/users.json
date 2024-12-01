@@ -35,8 +35,9 @@
         "id": "ND00001",
         "last_Name": "NS",
         "history": {"0": {
+            "date": "30/11/2024",
             "action": "User register",
-            "time": "30/11/2024"
+            "time": "00:00:00"
         }},
         "email": "duy123@gmail.com",
         "username": "duy"
@@ -56,8 +57,9 @@
         "id": "ND00002",
         "last_Name": "The tester",
         "history": {"0": {
+            "date": "30/11/2024",
             "action": "User register",
-            "time": "30/11/2024"
+            "time": "00:00:00"
         }},
         "email": "test123@gmail.com",
         "username": "test"
