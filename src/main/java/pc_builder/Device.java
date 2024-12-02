@@ -80,6 +80,7 @@ public class Device {
     
     public double truePrice; 
     public double performance = 0;
+    public String trueName;
     
     public JSONObject data;
     
@@ -126,6 +127,8 @@ public class Device {
         if (this.attributes.has("performance")) {
             this.performance = this.attributes.getDouble("performance");
         }
+        
+        this.trueName = (this.brand + " - " + this.name + " - " + this.des).toLowerCase();
     }
     
     // Add an information to User history

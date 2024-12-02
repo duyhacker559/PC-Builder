@@ -14,14 +14,20 @@ public class BuildPC {
     public ArrayList<String> component;
     public double price = 0;
     public double performance = 0;
-
-    public BuildPC(ArrayList<String> a) {
+    public int tagPoint = 0;
+    
+    public BuildPC(ArrayList<String> a, ArrayList<String> tags) {
         this.component = a;
         double totalPrice = 0;
         for (String i: component) {
             Device item = Device.items.get(i);
             totalPrice += item.truePrice;
             performance += item.performance;
+            for (String j: tags) {
+                if (item.trueName.contains(j)) {
+                    tagPoint++;
+                }
+            }
         }
         this.price = totalPrice;
     }

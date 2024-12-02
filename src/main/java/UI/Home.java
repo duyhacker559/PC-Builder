@@ -89,7 +89,6 @@ public class Home extends javax.swing.JFrame {
         Collections.sort(a);
         deviceBrands = (Vector<String>) a.clone();
         FillBrand.setModel(new javax.swing.DefaultComboBoxModel<>(a));
-        FillBrand1.setModel(new javax.swing.DefaultComboBoxModel<>(a));
         updateBalance();
         getSaleProduct();
     }
@@ -170,7 +169,6 @@ public class Home extends javax.swing.JFrame {
         NewsPanel5 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        FillBrand1 = new javax.swing.JComboBox<>();
         jLabel16 = new javax.swing.JLabel();
         FillMax1 = new javax.swing.JSpinner();
         jLabel17 = new javax.swing.JLabel();
@@ -179,7 +177,9 @@ public class Home extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         DisplayMax = new javax.swing.JSpinner();
         CheapestBuild = new javax.swing.JCheckBox();
-        PerformanceBuild = new javax.swing.JCheckBox();
+        jLabel15 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        TagField = new javax.swing.JTextArea();
         UserPage = new javax.swing.JPanel();
         NewsPanel4 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -887,10 +887,8 @@ public class Home extends javax.swing.JFrame {
         jLabel11.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(102, 102, 255)));
         jLabel11.setOpaque(true);
 
-        jLabel14.setText("Brand:");
-
-        FillBrand1.setBackground(new java.awt.Color(254, 254, 254));
-        FillBrand1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Mouse", " " }));
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel14.setText("Tag:");
 
         jLabel16.setText("Max:");
 
@@ -911,38 +909,41 @@ public class Home extends javax.swing.JFrame {
 
         CheapestBuild.setText("Cheapest");
 
-        PerformanceBuild.setText("Best performance");
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel15.setText("Price");
+
+        TagField.setColumns(20);
+        TagField.setRows(5);
+        jScrollPane5.setViewportView(TagField);
 
         javax.swing.GroupLayout NewsPanel5Layout = new javax.swing.GroupLayout(NewsPanel5);
         NewsPanel5.setLayout(NewsPanel5Layout);
         NewsPanel5Layout.setHorizontalGroup(
             NewsPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(NewsPanel5Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NewsPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(NewsPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BuildPC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(NewsPanel5Layout.createSequentialGroup()
+                .addGroup(NewsPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane5)
+                    .addComponent(BuildPC, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, NewsPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(FillMax1))
-                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(NewsPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(FillBrand1, 0, 217, Short.MAX_VALUE))
-                    .addGroup(NewsPanel5Layout.createSequentialGroup()
+                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, NewsPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(FillMin1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NewsPanel5Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(NewsPanel5Layout.createSequentialGroup()
+                        .addGap(0, 50, Short.MAX_VALUE)
                         .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(DisplayMax, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(NewsPanel5Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, NewsPanel5Layout.createSequentialGroup()
                         .addGroup(NewsPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(PerformanceBuild)
-                            .addComponent(CheapestBuild))
+                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CheapestBuild)
+                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -952,9 +953,11 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(NewsPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(FillBrand1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(NewsPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -965,13 +968,11 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CheapestBuild, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PerformanceBuild)
-                .addGap(34, 34, 34)
+                .addGap(32, 32, 32)
                 .addGroup(NewsPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(DisplayMax, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BuildPC, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -1522,6 +1523,13 @@ public class Home extends javax.swing.JFrame {
 
     private void BuildPCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuildPCActionPerformed
         // TODO add your handling code here:
+        
+        ArrayList<String> tags = new ArrayList<>();
+        String[] tagComponent = TagField.getText().toLowerCase().trim().split("\\s+");
+        for (String i: tagComponent) {
+            tags.add(i);
+        }
+        
         BuildContent.removeAll();
         String pcBuildComponent[] = {"Case","Monitor","Key Board","Mouse"}; 
         TreeMap<String, Boolean> check = new TreeMap<>();
@@ -1533,8 +1541,6 @@ public class Home extends javax.swing.JFrame {
             check.put(i, true);
         }
         
-        Boolean getAllBrand = (boolean) (FillBrand1.getSelectedIndex()==0);
-        
         // list all necessary device into a list inside a map
         for (String i: pcBuildComponent) {
             getDevices.put(i, new ArrayList<>());
@@ -1543,17 +1549,12 @@ public class Home extends javax.swing.JFrame {
         for (String id: Device.items.keySet()) {
             Device item = Device.getDevice(id);
             if (check.get(item.getType())) {
-                if (getAllBrand || FillBrand1.getSelectedItem().toString().compareTo(item.getType())==0) {
-                    getDevices.get(item.getType()).add(item);
-                }
+                getDevices.get(item.getType()).add(item);
             }
         }
         
         // Generate algorithm
         boolean isCheapest = CheapestBuild.isSelected();
-        boolean isPerformance = PerformanceBuild.isSelected();
-        
-        
         
         boolean flag = true;
         int[] sinh = new int[pcBuildComponent.length];
@@ -1569,7 +1570,7 @@ public class Home extends javax.swing.JFrame {
             for (int i=0; i<sinh.length; i++) {
                 component.add(getDevices.get(pcBuildComponent[i]).get(sinh[i]).getId());
             }
-            res.add(new BuildPC(component));
+            res.add(new BuildPC(component,tags));
             pointer = 0;
             sinh[pointer]++;
             if (sinh[pointer]>=getDevices.get(pcBuildComponent[pointer]).size()) {
@@ -1592,8 +1593,8 @@ public class Home extends javax.swing.JFrame {
                 if (isCheapest) {
                     res = Double.compare(o1.price, o2.price);
                 }
-                if (res == 0 && isPerformance) {
-                    res = Double.compare(o2.performance, o1.performance);
+                if (res == 0) {
+                    res = Integer.compare(o2.tagPoint, o1.tagPoint);
                 }
                 return res;
             }
@@ -1726,7 +1727,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton Delete_User_Button2;
     private javax.swing.JSpinner DisplayMax;
     private javax.swing.JComboBox<String> FillBrand;
-    private javax.swing.JComboBox<String> FillBrand1;
     private javax.swing.JSpinner FillMax;
     private javax.swing.JSpinner FillMax1;
     private javax.swing.JSpinner FillMin;
@@ -1768,7 +1768,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel OldPasswordLabel;
     private javax.swing.JPasswordField OldPasswordTextField;
     private javax.swing.JLabel OldPasswordWarning;
-    private javax.swing.JCheckBox PerformanceBuild;
     private javax.swing.JLabel ReNewPasswordLabel;
     private javax.swing.JPasswordField ReNewPasswordTextField;
     private javax.swing.JLabel ReNewPasswordWarning;
@@ -1781,6 +1780,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel SearchPage;
     private javax.swing.JScrollPane SearchResult1;
     private javax.swing.JScrollPane SearchResult2;
+    private javax.swing.JTextArea TagField;
     private javax.swing.JButton UserButton;
     private javax.swing.JPanel UserPage;
     private javax.swing.JPanel UserPanel;
@@ -1795,6 +1795,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -1810,6 +1811,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JToggleButton jToggleButton1;
