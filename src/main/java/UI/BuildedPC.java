@@ -29,10 +29,8 @@ public class BuildedPC extends javax.swing.JPanel {
         IndexLabel.setText(String.format("Build %d:",index));
         BuildPrice.setText(String.format("$%.2f", price));
         
-        for (String id: devices) {
-            JSONObject device = DeviceStorage.getItem(id);
-            
-            BuildItem newItem = new BuildItem(parent, device);
+        for (String id: devices) { 
+            BuildItem newItem = new BuildItem(parent, id);
             newItem.setVisible(true);
             ItemContent.add(newItem);
         }

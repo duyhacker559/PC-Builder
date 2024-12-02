@@ -15,23 +15,19 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import org.json.JSONObject;
+import pc_builder.Device;
 
 /**
  *
  * @author Admin
  */
 public class DeviceInformation extends javax.swing.JFrame {
-    private JSONObject Device;
+    private Device device;
     private Home parent;
     /**
      * Creates new form DeviceInformation
      */
-    public static BufferedImage getBufferedImageFromJson(JSONObject jsonObject, String key) throws IOException {
-        if (!jsonObject.has(key)) {
-            throw new IllegalArgumentException("Key not found in JSONObject: " + key);
-        }
-
-        String base64Image = jsonObject.getString(key); // Get string Base64 from JSON
+    public static BufferedImage getBufferedImageFromJson(String base64Image) throws IOException {
         byte[] imageBytes = Base64.getDecoder().decode(base64Image); // Decode Base64
 
         // Change into BufferedImage
@@ -40,27 +36,20 @@ public class DeviceInformation extends javax.swing.JFrame {
         }
     }
     
-    public DeviceInformation(Home parent, JSONObject data) {
+    public DeviceInformation(Home parent, String data) {
         initComponents();
         this.parent = parent;
-        this.Device = data;
+        this.device = Device.getDevice(data);
         
-        TypeTittle.setText(data.getString("type"));
-        BrandTittle.setText(data.getString("brand"));
-        DeviceName.setText(data.getString("name"));
-        this.setTitle("Information - "+data.getString("name"));
-        DescriptionText.setText(data.getString("des"));
-        
-        double price = data.getDouble("price");
-        if (data.has("forSale")) {
-            if (data.getBoolean("forSale")) {
-                price = (1-data.getDouble("sale"))*price;
-            }
-        }
-        PurchaseButton.setText(String.format("Get for $%.2f", price));
+        TypeTittle.setText(device.getType());
+        BrandTittle.setText(device.getBrand());
+        DeviceName.setText(device.getName());
+        this.setTitle("Information - "+device.getName());
+        DescriptionText.setText(device.getDes());
+        PurchaseButton.setText(String.format("Get for $%.2f", device.truePrice));
 
         try {
-            BufferedImage originalImage = getBufferedImageFromJson(data, "icon");
+            BufferedImage originalImage = getBufferedImageFromJson(device.getIcon());
             BufferedImage resizedImage = new BufferedImage(100, 100, originalImage.getType());
             Graphics2D g2d = resizedImage.createGraphics();
             g2d.drawImage(originalImage, 0, 0, 100, 100, null);
@@ -79,7 +68,7 @@ public class DeviceInformation extends javax.swing.JFrame {
     }
 
     public void purchase() {
-        parent.purchase(Device);
+        parent.purchase(device.getId());
         this.dispose();
     }
     
@@ -102,9 +91,9 @@ public class DeviceInformation extends javax.swing.JFrame {
         DescriptionText = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(400, 500));
-        setMinimumSize(new java.awt.Dimension(300, 500));
-        setPreferredSize(new java.awt.Dimension(320, 480));
+        setMaximumSize(new java.awt.Dimension(500, 500));
+        setMinimumSize(new java.awt.Dimension(500, 500));
+        setPreferredSize(new java.awt.Dimension(500, 480));
         getContentPane().setLayout(null);
 
         DeviceIcon.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -140,7 +129,7 @@ public class DeviceInformation extends javax.swing.JFrame {
         DeviceName.setText("DeviceName");
         DeviceName.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         getContentPane().add(DeviceName);
-        DeviceName.setBounds(115, 10, 180, 40);
+        DeviceName.setBounds(115, 10, 350, 40);
 
         PurchaseButton.setBackground(new java.awt.Color(0, 204, 0));
         PurchaseButton.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -154,7 +143,7 @@ public class DeviceInformation extends javax.swing.JFrame {
             }
         });
         getContentPane().add(PurchaseButton);
-        PurchaseButton.setBounds(10, 390, 280, 40);
+        PurchaseButton.setBounds(190, 390, 280, 40);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Description:");
@@ -170,13 +159,14 @@ public class DeviceInformation extends javax.swing.JFrame {
         DescriptionText.setAutoscrolls(false);
         DescriptionText.setFocusable(false);
         DescriptionText.setMargin(new java.awt.Insets(6, 6, 6, 6));
+        DescriptionText.setPreferredSize(new java.awt.Dimension(480, 44));
         DescriptionText.setRequestFocusEnabled(false);
         DescriptionText.setSelectionColor(new java.awt.Color(242, 242, 242));
         DescriptionText.setVerifyInputWhenFocusTarget(false);
         jScrollPane1.setViewportView(DescriptionText);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 150, 280, 230);
+        jScrollPane1.setBounds(10, 150, 460, 230);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

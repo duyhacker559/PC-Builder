@@ -16,7 +16,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import pc_builder.Device;
 import pc_builder.DeviceStorage;
+import pc_builder.User;
 import pc_builder.UserStorage;
 
 /**
@@ -53,7 +55,6 @@ public class Admin extends javax.swing.JFrame {
             return name.toLowerCase().contains(SortByTextField.getText().toLowerCase());
         }
         });
-        
     }
     
     public void device_getTable() {
@@ -663,6 +664,8 @@ public class Admin extends javax.swing.JFrame {
 
     private void LogOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutButtonActionPerformed
         // TODO add your handling code here:
+        User.loadUsers(UserStorage.loadItems());
+        Device.loadDevices(DeviceStorage.loadItems());
         parent.close();
     }//GEN-LAST:event_LogOutButtonActionPerformed
 

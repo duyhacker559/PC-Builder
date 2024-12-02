@@ -13,10 +13,10 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import pc_builder.DeviceStorage;
-import pc_builder.UserStorage;
-import pc_builder.DeviceStorage;
+import pc_builder.Device;
 import pc_builder.TimeHandler;
+import pc_builder.BuildPC;
+import pc_builder.User;
 
 /**
  *
@@ -67,10 +67,10 @@ public class Home extends javax.swing.JFrame {
     public Home(Login parent) {
         initComponents();
         this.parent = parent;
-        HomeHello.setText(String.format("Hi, %s!",parent.currentUser.get("name")));
-        UsernamePanel.setText((String)parent.currentUser.get("username"));
+        HomeHello.setText(String.format("Hi, %s!",parent.currentUser.name));
+        UsernamePanel.setText((String)parent.currentUser.getUsername());
         
-        TreeSet<Object> types = DeviceStorage.getDistinctValue("type");
+        TreeSet<Object> types = Device.getDistinctValue("type");
         Vector<String> a = new Vector<String>();
         for (Object i: types) {
             a.add((String)i);
@@ -80,7 +80,7 @@ public class Home extends javax.swing.JFrame {
         deviceTypes = (Vector<String>) a.clone();
         FillType.setModel(new javax.swing.DefaultComboBoxModel<>(a));
         
-        types = DeviceStorage.getDistinctValue("brand");
+        types = Device.getDistinctValue("brand");
         a = new Vector<String>();
         for (Object i: types) {
             a.add((String)i);
@@ -95,7 +95,7 @@ public class Home extends javax.swing.JFrame {
     }
 
     public void updateBalance () {
-        UsernamePanel.setText(parent.currentUser.getString("username")+" | $"+parent.currentUser.getInt("balance"));
+        UsernamePanel.setText(parent.currentUser.getUsername()+" | $"+parent.currentUser.balance);
     }
     
     /**
@@ -1399,7 +1399,7 @@ public class Home extends javax.swing.JFrame {
     private void Delete_User_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Delete_User_ButtonActionPerformed
         // TODO add your handling code here:
         if (ConfirmDeleteAcc.isSelected()) {
-            UserStorage.deleteItem((String)parent.currentUser.get("username"));
+            User.deleteUser(parent.currentUser.getUsername());
             parent.close();
         }
     }//GEN-LAST:event_Delete_User_ButtonActionPerformed
@@ -1431,7 +1431,7 @@ public class Home extends javax.swing.JFrame {
             OldPasswordWarning.setVisible(true);
         } else {
             try {
-                if (UserStorage.verifyPassword((String)parent.currentUser.get("password"), content)) {
+                if (parent.currentUser.logIn(content)) {
                     
                 } else {
                     OldPasswordWarning.setText("Wrong password!");
@@ -1458,63 +1458,35 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_NewPasswordTextFieldFocusLost
 
-    public void purchase(JSONObject data) {
-        double price = data.getDouble("price");
-        if (data.has("forSale")) {
-            if (data.getBoolean("forSale")) {
-                price = (1-data.getDouble("sale"))*price;
-            }
-        }
-        double userBalance = parent.currentUser.getDouble("balance");
+    public void purchase(String id) {
+        Device device = Device.getDevice(id);
+        double price = device.truePrice;
+        double userBalance = parent.currentUser.balance;
         if (userBalance<price) {
             showWarningDialog("Purchase failed!", "Your balance is not enough...");
         } else {
-            showWarningDialog("Purchase complete!",String.format("You purchased a %s for $%.2f", data.getString("name"), price));
+            showWarningDialog("Purchase complete!",String.format("You purchased a %s for $%.2f", device.getName(), price));
             userBalance -= price;
-            parent.currentUser.put("balance", userBalance);
-            JSONObject history = parent.currentUser.getJSONObject("history");
-            int index = 1;
-            while (history.has(index+"")) {
-                index++;
-            }
-            JSONObject newRecord = new JSONObject();
-            newRecord.put("date", TimeHandler.getCurrentDay());
-            newRecord.put("time", TimeHandler.getCurrentTime());
-            newRecord.put("action", String.format("User purchase [%s:%s] for [%.2f]",data.getString("id"),data.getString("name"),price));
-            history.put(index+"", newRecord);
-            UserStorage.updateItem(parent.currentUser.getString("username"), parent.currentUser);
+            parent.currentUser.balance = userBalance;
+            parent.currentUser.addRecord(String.format("User purchase [%s:%s] for [%.2f]",id,device.getName(),price));
+            parent.currentUser.update();
             updateBalance();
         }
     }
     
     public void purchaseSets(ArrayList<String> devices, double price) {
-        double userBalance = parent.currentUser.getDouble("balance");
+        double userBalance = parent.currentUser.balance;
         if (userBalance<price) {
             showWarningDialog("Purchase failed!", "Your balance is not enough...");
         } else {
             showWarningDialog("Purchase complete!",String.format("You purchased a set for $%.2f", price));
             userBalance -= price;
             for (String id: devices) {
-                JSONObject data = DeviceStorage.getItem(id);
-                parent.currentUser.put("balance", userBalance);
-                JSONObject history = parent.currentUser.getJSONObject("history");
-                int index = 1;
-                while (history.has(index+"")) {
-                    index++;
-                }
-                double devicePrice = data.getDouble("price");
-                if (data.has("forSale")) {
-                    if (data.getBoolean("forSale")) {
-                        devicePrice = (1-data.getDouble("sale"))*devicePrice;
-                    }
-                }
-                JSONObject newRecord = new JSONObject();
-                newRecord.put("date", TimeHandler.getCurrentDay());
-                newRecord.put("time", TimeHandler.getCurrentTime());
-                newRecord.put("action", String.format("User purchase [%s:%s] for [%.2f]",data.getString("id"),data.getString("name"),devicePrice));
-                history.put(index+"", newRecord);
-                }
-            UserStorage.updateItem(parent.currentUser.getString("username"), parent.currentUser);
+                Device device = Device.getDevice(id);
+                parent.currentUser.balance = userBalance;
+                parent.currentUser.addRecord(String.format("User purchase [%s:%s] for [%.2f]",device.getId(),device.getName(),device.truePrice));
+            }
+            parent.currentUser.update();
             updateBalance();
         }
     }
@@ -1535,11 +1507,11 @@ public class Home extends javax.swing.JFrame {
                 ApplyNewPasswordWarning.setVisible(true);
                 return;
             }
-            if (UserStorage.verifyPassword((String)parent.currentUser.getString("password"), String.copyValueOf(OldPasswordTextField.getPassword()))) {
+            if (parent.currentUser.logIn(String.copyValueOf(OldPasswordTextField.getPassword()))) {
                 if (String.copyValueOf(ReNewPasswordTextField.getPassword()).compareTo(String.copyValueOf(NewPasswordTextField.getPassword()))==0) {
-                    String hashedPassword = UserStorage.hashPassword(String.copyValueOf(NewPasswordTextField.getPassword()));
-                    parent.currentUser.put("password", hashedPassword);
-                    UserStorage.updateItem((String)parent.currentUser.get("username"), parent.currentUser);
+                    String hashedPassword = User.hashPassword(String.copyValueOf(NewPasswordTextField.getPassword()));
+                    parent.currentUser.data.put("password", hashedPassword);
+                    parent.currentUser.update();
                     System.out.println("User password changed!");
                 }
             }
@@ -1553,7 +1525,7 @@ public class Home extends javax.swing.JFrame {
         BuildContent.removeAll();
         String pcBuildComponent[] = {"Case","Monitor","Key Board","Mouse"}; 
         TreeMap<String, Boolean> check = new TreeMap<>();
-        TreeMap<String, ArrayList<JSONObject>> getDevices = new TreeMap<>();
+        TreeMap<String, ArrayList<Device>> getDevices = new TreeMap<>();
         for (String i: deviceTypes) {
             check.put(i, false);
         }
@@ -1561,19 +1533,18 @@ public class Home extends javax.swing.JFrame {
             check.put(i, true);
         }
         
-        // load all devices json
-        JSONArray devices = DeviceStorage.loadItems();
         Boolean getAllBrand = (boolean) (FillBrand1.getSelectedIndex()==0);
         
         // list all necessary device into a list inside a map
         for (String i: pcBuildComponent) {
             getDevices.put(i, new ArrayList<>());
         }
-        for (int i = 0; i < devices.length(); i++) {
-            JSONObject item = devices.getJSONObject(i);
-            if (check.get((String)item.get("type"))) {
-                if (getAllBrand || FillBrand1.getSelectedItem().toString().compareTo((String)item.get("brand"))==0) {
-                    getDevices.get((String)item.get("type")).add(item);
+        
+        for (String id: Device.items.keySet()) {
+            Device item = Device.getDevice(id);
+            if (check.get(item.getType())) {
+                if (getAllBrand || FillBrand1.getSelectedItem().toString().compareTo(item.getType())==0) {
+                    getDevices.get(item.getType()).add(item);
                 }
             }
         }
@@ -1582,71 +1553,23 @@ public class Home extends javax.swing.JFrame {
         boolean isCheapest = CheapestBuild.isSelected();
         boolean isPerformance = PerformanceBuild.isSelected();
         
-        class PCBuild implements Comparable<PCBuild> {
-            public int [] component;
-            public double price = 0;
-            public double performance = 0;
-            public ArrayList<String> devices = new ArrayList<>();
-            public PCBuild(int [] a) {
-                this.component = a;
-                
-                double totalPrice = 0;
-                for (int j=0;j<component.length;j++) {
-                    JSONObject item = getDevices.get(pcBuildComponent[j]).get(component[j]);
-                    double price = item.getDouble("price");
-                    if (item.has("forSale")) {
-                        if (item.getBoolean("forSale")) {
-                            price = (1-item.getDouble("sale"))*price;
-                        }
-                    }
-                    if (item.has("attributes")) {
-                        if (item.getJSONObject("attributes").has("performance")) {
-                            this.performance += item.getJSONObject("attributes").getDouble("performance");
-                        }
-                    }
-                    devices.add(item.getString("id"));
-                    totalPrice += price;
-                }
-                this.price = totalPrice;
-            }
-            
-            public void print() {
-                for (int i = 0; i < component.length; i++) {
-                    System.out.print(pcBuildComponent[i]+":"+getDevices.get(pcBuildComponent[i]).get(component[i]).getString("name")+" ");
-                }
-                System.out.println("");
-            }
- 
-            @Override
-            public int compareTo(PCBuild o) {
-                int res = 0;
-                if (isCheapest) {
-                    res = Double.compare(price, o.price);
-                }
-                if (res == 0 && isPerformance) {
-                    res = Double.compare(o.performance, performance);
-                }
-                return res;
-            }
-        }
+        
         
         boolean flag = true;
         int[] sinh = new int[pcBuildComponent.length];
         int pointer = 0;
         int l = sinh.length;
-        ArrayList<PCBuild> res = new ArrayList<>();
+        ArrayList<BuildPC> res = new ArrayList<>();
         for (int key = 0; key < pcBuildComponent.length; key++) {
-            ArrayList<JSONObject> i = getDevices.get(pcBuildComponent[key]);
-            System.out.print(pcBuildComponent[key]+":");
-            for (JSONObject j: i) {
-                System.out.print(j.get("name")+" ");
-            }
-            System.out.print(" ("+i.size()+")");
-            System.out.println("");
+            ArrayList<Device> i = getDevices.get(pcBuildComponent[key]);
         }
         
         while (flag) {
-            res.add(new PCBuild(sinh.clone()));
+            ArrayList<String> component = new ArrayList<>();
+            for (int i=0; i<sinh.length; i++) {
+                component.add(getDevices.get(pcBuildComponent[i]).get(sinh[i]).getId());
+            }
+            res.add(new BuildPC(component));
             pointer = 0;
             sinh[pointer]++;
             if (sinh[pointer]>=getDevices.get(pcBuildComponent[pointer]).size()) {
@@ -1662,17 +1585,30 @@ public class Home extends javax.swing.JFrame {
             }
         } 
         
-        Collections.sort(res);
+        res.sort(new Comparator<BuildPC> (){
+            @Override
+            public int compare(BuildPC o1, BuildPC o2) {
+                int res = 0;
+                if (isCheapest) {
+                    res = Double.compare(o1.price, o2.price);
+                }
+                if (res == 0 && isPerformance) {
+                    res = Double.compare(o2.performance, o1.performance);
+                }
+                return res;
+            }
+            
+        });
         // Create item frame
         
         int counter = 0;
         int maxDisplay = Integer.parseInt(DisplayMax.getValue().toString());
-        for (PCBuild i: res) {
+        for (BuildPC i: res) {
             if (i.price>=Double.parseDouble(FillMin1.getValue().toString()) && i.price<=Double.parseDouble(FillMax1.getValue().toString())) {
                 //System.out.print("Price "+i.price+"  ");
                 //i.print();
                 counter++;
-                BuildedPC item = new BuildedPC(this,counter,i.price,i.devices);
+                BuildedPC item = new BuildedPC(this,counter,i.price,i.component);
                 item.setVisible(true);
                 BuildContent.add(item);
             }
@@ -1687,23 +1623,21 @@ public class Home extends javax.swing.JFrame {
     private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
         // TODO add your handling code here:
         SearchContent.removeAll();
-        JSONArray getDevices = DeviceStorage.loadItems();
-        ArrayList<JSONObject> a = new ArrayList<>();
+        ArrayList<String> a = new ArrayList<>();
         Boolean getAllType = (boolean) (FillType.getSelectedIndex()==0);
         Boolean getAllBrand = (boolean) (FillBrand.getSelectedIndex()==0);
-        for (int i = 0; i < getDevices.length(); i++) {
-            JSONObject item = getDevices.getJSONObject(i);
-            if ((getAllType || FillType.getSelectedItem().toString().compareTo((String)item.get("type"))==0) && (getAllBrand || FillBrand.getSelectedItem().toString().compareTo((String)item.get("brand"))==0) && (item.getString("name").contains(FillName.getText())) && item.getInt("price")>=(int)FillMin.getValue() && item.getInt("price")<=(int)FillMax.getValue() ) {
-                a.add(item);
+        for (Device item: Device.items.values()) {
+            if ((getAllType || FillType.getSelectedItem().toString().compareTo(item.getType())==0) && (getAllBrand || FillBrand.getSelectedItem().toString().compareTo(item.getBrand())==0) && (item.getName().contains(FillName.getText())) && item.truePrice>=(int)FillMin.getValue() && item.truePrice<=(int)FillMax.getValue() ) {
+                a.add(item.getId());
             }
         }
-        a.sort(new Comparator<JSONObject>() {
+        a.sort(new Comparator<String>() {
             @Override
-            public int compare(JSONObject a, JSONObject b) {
-                return a.getString("name").compareTo(b.getString("name"));
+            public int compare(String a, String b) {
+                return Device.items.get(a).getName().compareTo(Device.items.get(b).getName());
             }
         });
-        for (JSONObject i: a) {
+        for (String i: a) {
             SearchItem item = new SearchItem(this, i);
             item.setVisible(true);
             SearchContent.add(item);
@@ -1717,7 +1651,7 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel tabelModel = (DefaultTableModel)HistoryTable.getModel();
         tabelModel.setRowCount(0);
-        JSONObject historyObject = parent.currentUser.getJSONObject("history");
+        JSONObject historyObject = parent.currentUser.getHistory();
         for (String key : historyObject.keySet()) {
             String data[] = {key, historyObject.getJSONObject(key).getString("date"), historyObject.getJSONObject(key).getString("time"), historyObject.getJSONObject(key).getString("action")};
             tabelModel.addRow(data);
@@ -1726,23 +1660,20 @@ public class Home extends javax.swing.JFrame {
 
     public void getSaleProduct() {
         SearchContent1.removeAll();
-        JSONArray getDevices = DeviceStorage.loadItems();
-        ArrayList<JSONObject> a = new ArrayList<>();
-        for (int i = 0; i < getDevices.length(); i++) {
-            JSONObject item = getDevices.getJSONObject(i);
-            if (item.has("forSale")){
-                if (item.getBoolean("forSale")) {
-                    a.add(item);
-                }
+        JSONArray getDevices = Device.dataArray;
+        ArrayList<String> a = new ArrayList<>();
+        for (Device i: Device.items.values()) {
+            if (i.isForSale()){
+                a.add(i.getId());
             }
         }
-        a.sort(new Comparator<JSONObject>() {
+        a.sort(new Comparator<String>() {
             @Override
-            public int compare(JSONObject a, JSONObject b) {
-                return a.getString("name").compareTo(b.getString("name"));
+            public int compare(String a, String b) {
+                return Device.items.get(a).getName().compareTo(Device.items.get(b).getName());
             }
         });
-        for (JSONObject i: a) {
+        for (String i: a) {
             SearchItem item = new SearchItem(this, i);
             item.setVisible(true);
             SearchContent1.add(item);

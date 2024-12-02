@@ -15,23 +15,19 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import org.json.JSONObject;
+import pc_builder.Device;
 
 /**
  *
  * @author Admin
  */
 public class SearchItem extends javax.swing.JPanel {
-    private JSONObject device;
+    private Device device;
     private Home parent;
     /**
      * Creates new form SearchItem
      */
-    public static BufferedImage getBufferedImageFromJson(JSONObject jsonObject, String key) throws IOException {
-        if (!jsonObject.has(key)) {
-            throw new IllegalArgumentException("Key not found in JSONObject: " + key);
-        }
-
-        String base64Image = jsonObject.getString(key); // Get string Base64 from JSON
+    public static BufferedImage getBufferedImageFromJson(String base64Image) throws IOException {// Get string Base64 from JSON
         byte[] imageBytes = Base64.getDecoder().decode(base64Image); // Decode Base64
 
         // Change into BufferedImage
@@ -40,26 +36,22 @@ public class SearchItem extends javax.swing.JPanel {
         }
     }
     
-    public SearchItem(Home parent, JSONObject device) {
-        this.device = device;
+    public SearchItem(Home parent, String device) {
+        this.device = Device.getDevice(device);
         this.parent = parent;
         this.setLayout(null);
         
         initComponents();
         
-        DeviceName.setText(device.getString("name"));
-        DeviceType.setText(device.getString("type")+"  |  "+device.getString("brand"));
-        DeviceCost.setText("$"+device.get("price").toString());
-        if (device.has("forSale")) {
-            if (device.getBoolean("forSale")) {
-                double discount = Double.parseDouble(device.get("sale").toString())*Double.parseDouble(device.get("price").toString());
-                double discountPrice = Double.parseDouble(device.get("price").toString()) - discount;
-                DeviceDiscount.setText(String.format("$%.2f", discount));
-                DeviceCost.setText(String.format("$%.2f", discountPrice));
-            }
+        DeviceName.setText(this.device.getName());
+        DeviceType.setText(this.device.getType()+"  |  "+this.device.getBrand());
+        DeviceCost.setText("$%.2f".formatted(this.device.getPrice()));
+        if (this.device.isForSale()) {
+            DeviceDiscount.setText("$%.2f".formatted(this.device.getPrice()-this.device.truePrice));
+            DeviceCost.setText("$%.2f".formatted(this.device.truePrice));
         }
         try {
-            BufferedImage originalImage = getBufferedImageFromJson(device, "icon");
+            BufferedImage originalImage = getBufferedImageFromJson(this.device.getIcon());
             BufferedImage resizedImage = new BufferedImage(50, 50, originalImage.getType());
             Graphics2D g2d = resizedImage.createGraphics();
             g2d.drawImage(originalImage, 0, 0, 50, 50, null);
@@ -78,7 +70,7 @@ public class SearchItem extends javax.swing.JPanel {
     }
 
     public void purchase() {
-        parent.purchase(device);
+        parent.purchase(this.device.getId());
     }
     
     /**
@@ -163,7 +155,7 @@ public class SearchItem extends javax.swing.JPanel {
 
     private void DeviceNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeviceNameActionPerformed
         // TODO add your handling code here:
-        DeviceInformation newInfo = new DeviceInformation(parent, device);
+        DeviceInformation newInfo = new DeviceInformation(parent, device.getId());
         newInfo.setLocationRelativeTo(null);
         newInfo.setVisible(true);
     }//GEN-LAST:event_DeviceNameActionPerformed

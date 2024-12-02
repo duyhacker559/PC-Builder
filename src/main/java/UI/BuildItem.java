@@ -15,23 +15,19 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import org.json.JSONObject;
+import pc_builder.Device;
 
 /**
  *
  * @author Admin
  */
 public class BuildItem extends javax.swing.JPanel {
-    private JSONObject device;
+    private Device device;
     private Home parent;
     /**
      * Creates new form BuildItem
      */
-    public static BufferedImage getBufferedImageFromJson(JSONObject jsonObject, String key) throws IOException {
-        if (!jsonObject.has(key)) {
-            throw new IllegalArgumentException("Key not found in JSONObject: " + key);
-        }
-
-        String base64Image = jsonObject.getString(key); // Get string Base64 from JSON
+    public static BufferedImage getBufferedImageFromJson(String base64Image) throws IOException {
         byte[] imageBytes = Base64.getDecoder().decode(base64Image); // Decode Base64
 
         // Change into BufferedImage
@@ -40,15 +36,15 @@ public class BuildItem extends javax.swing.JPanel {
         }
     }
     
-    public BuildItem(Home parent, JSONObject data) {
+    public BuildItem(Home parent, String device) {
         initComponents();
         this.parent = parent;
-        device = data;
-        Type.setText(data.getString("type"));
-        Brand.setText(data.getString("brand"));
-        DeviceButton.setText(data.getString("name"));
+        this.device = Device.getDevice(device);
+        Type.setText(this.device.getType());
+        Brand.setText(this.device.getBrand());
+        DeviceButton.setText("$%.2f".formatted(this.device.truePrice));
         try {
-            BufferedImage originalImage = getBufferedImageFromJson(data, "icon");
+            BufferedImage originalImage = getBufferedImageFromJson(this.device.getIcon());
             BufferedImage resizedImage = new BufferedImage(75, 75, originalImage.getType());
             Graphics2D g2d = resizedImage.createGraphics();
             g2d.drawImage(originalImage, 0, 0, 75, 75, null);
@@ -154,12 +150,12 @@ public class BuildItem extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     public void purchase() {
-        parent.purchase(device);
+        parent.purchase(this.device.getId());
     }
     
     private void DeviceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeviceButtonActionPerformed
         // TODO add your handling code here:
-        DeviceInformation newInfo = new DeviceInformation(parent, device);
+        DeviceInformation newInfo = new DeviceInformation(parent, this.device.getId());
         newInfo.setLocationRelativeTo(null);
         newInfo.setVisible(true);
     }//GEN-LAST:event_DeviceButtonActionPerformed

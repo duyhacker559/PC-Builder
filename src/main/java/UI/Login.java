@@ -10,7 +10,11 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JRadioButton;
 import org.json.JSONObject;
+import pc_builder.Device;
+import pc_builder.DeviceStorage;
+import pc_builder.StorageSystem;
 import pc_builder.TimeHandler;
+import pc_builder.User;
 import pc_builder.UserStorage;
 /**
  *
@@ -18,7 +22,7 @@ import pc_builder.UserStorage;
  */
 public class Login extends javax.swing.JFrame {
     private JFrame userHomePage;
-    public JSONObject currentUser;
+    public User currentUser;
     /**
      * Creates new form Login
      */
@@ -103,6 +107,7 @@ public class Login extends javax.swing.JFrame {
         Description = new javax.swing.JLabel();
         License = new javax.swing.JLabel();
         CompanyLabel = new javax.swing.JLabel();
+        jToggleButton1 = new javax.swing.JToggleButton();
 
         Gender.add(GenderButton1);
         Gender.add(GenderButton2);
@@ -650,29 +655,45 @@ public class Login extends javax.swing.JFrame {
         CompanyLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         CompanyLabel.setText("Eitech");
 
+        jToggleButton1.setBackground(new java.awt.Color(102, 255, 102));
+        jToggleButton1.setMnemonic('1');
+        jToggleButton1.setOpaque(true);
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout LogoLayout = new javax.swing.GroupLayout(Logo);
         Logo.setLayout(LogoLayout);
         LogoLayout.setHorizontalGroup(
             LogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LogoLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(LogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Description)
-                    .addComponent(Icon, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
-                    .addComponent(License, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(CompanyLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(LogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(LogoLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(LogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Description)
+                            .addComponent(Icon, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                            .addComponent(License, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(CompanyLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(LogoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         LogoLayout.setVerticalGroup(
             LogoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(LogoLayout.createSequentialGroup()
-                .addGap(153, 153, 153)
+                .addContainerGap()
+                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(106, 106, 106)
                 .addComponent(CompanyLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Icon, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Description)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
                 .addComponent(License)
                 .addGap(50, 50, 50))
         );
@@ -834,32 +855,31 @@ public class Login extends javax.swing.JFrame {
             if (GenderButton1.isSelected()) gender = GenderButton1.getText();
             if (GenderButton2.isSelected()) gender = GenderButton2.getText();
             if (GenderButton3.isSelected()) gender = GenderButton3.getText();
-            JSONObject birth = new JSONObject();
-            birth.put("day", Integer.parseInt(DateBox.getSelectedItem().toString()));
-            birth.put("month", Integer.parseInt(MonthBox.getSelectedItem().toString()));
-            birth.put("year", Integer.parseInt(YearBox.getSelectedItem().toString()));
             String address = LastNameTextField.getText();
             
-            JSONObject newUser = UserStorage.Sample();
+            JSONObject newUser = new JSONObject();
             newUser.put("username", username);
             newUser.put("password", password);
             newUser.put("email", email);
             newUser.put("name", name);
             newUser.put("last_Name", lastName);
-            newUser.put("birth", birth);
+            int date =  Integer.parseInt(DateBox.getSelectedItem().toString());
+            int month = Integer.parseInt(MonthBox.getSelectedItem().toString());
+            int year = Integer.parseInt(YearBox.getSelectedItem().toString());
+            newUser.put("birth", String.format("%02d/%02d/%04d", date, month, year));
             newUser.put("gender", gender);
             newUser.put("address", address);
             newUser.put("admin", false);
-            newUser.put("balance", 0);
-            JSONObject history = new JSONObject();
-            
-            JSONObject today = new JSONObject();
-            today.put("time", TimeHandler.getCurrentDay());
-            today.put("action", "User register");
-            
-            history.put("0", today);
+            newUser.put("balance", (double)0);
+            JSONObject history = new JSONObject(){{
+                this.put("0", new JSONObject(){{
+                    this.put("time", TimeHandler.getCurrentTime());
+                    this.put("date", TimeHandler.getCurrentDay());
+                    this.put("action", "User register");
+                }});
+            }};
             newUser.put("history", history);
-            UserStorage.addItem(newUser);
+            User.newUser(newUser);
             reset();
         } else {
             RegisterWarning.setVisible(true);
@@ -871,13 +891,13 @@ public class Login extends javax.swing.JFrame {
         String username = UsernameTextField.getText();
         String password = String.copyValueOf(PasswordTextField.getPassword());
         UserNotFoundWarning.setVisible(false);
-        JSONObject user = UserStorage.getItem(username);
+        User user = User.getUser(username);
         if (user != null) {
             try {
-                if (UserStorage.verifyPassword(user.getString("password"), password)) {
-                    System.out.println("Login complete!!!, Hello %s!".formatted(user.get("username")));
+                if (user.logIn(password)) {
+                    System.out.println("Login complete!!!, Hello %s!".formatted(user.name));
                     currentUser = user;
-                    if ((boolean)user.get("admin")) {
+                    if (user.isAdmin()) {
                         userHomePage = new Admin(this);
                         userHomePage.setLocationRelativeTo(null);
                         userHomePage.setVisible(true);
@@ -921,6 +941,13 @@ public class Login extends javax.swing.JFrame {
             AddressWarning.setVisible(true);
         }
     }//GEN-LAST:event_AddressTextFieldFocusLost
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        // TODO add your handling code here:
+        StorageSystem.online = !jToggleButton1.isSelected();
+        User.loadUsers(UserStorage.loadItems());
+        Device.loadDevices(DeviceStorage.loadItems());
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     public void close() {
         userHomePage.dispose();
@@ -1032,5 +1059,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }

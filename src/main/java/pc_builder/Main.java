@@ -21,6 +21,9 @@ public class Main {
         // TODO code application logic here
         UserStorage.initiate();
         DeviceStorage.initiate();
+        User.loadUsers(UserStorage.loadItems());
+        Device.loadDevices(DeviceStorage.loadItems());
+        System.out.println(User.dataArray);
         Login GUI = new Login();
         GUI.setLocationRelativeTo(null);
         GUI.setVisible(true);
