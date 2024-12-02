@@ -502,7 +502,7 @@ public class UserStorage{
                     item.put("password", rs.getString("password"));
                     item.put("name", rs.getString("name"));
                     item.put("last_Name", rs.getString("last_Name"));
-                    item.put("birth", rs.getString(itemname));
+                    item.put("birth", rs.getString("birth"));
                     item.put("gender", rs.getString("gender"));
                     item.put("email", rs.getString("email"));
                     item.put("address", rs.getString("address"));

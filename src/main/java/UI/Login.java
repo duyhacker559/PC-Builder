@@ -771,6 +771,9 @@ public class Login extends javax.swing.JFrame {
         if (content.length()==0) {
             UsernameWarning.setText("Username must have atleast 10 characters");
             UsernameWarning.setVisible(true);
+        } else if (User.getUser(content)!=null) {
+            UsernameWarning.setText("Username already exist!");
+            UsernameWarning.setVisible(true);
         }
     }//GEN-LAST:event_UsernameTextField1FocusLost
 
@@ -839,6 +842,7 @@ public class Login extends javax.swing.JFrame {
         if (RePasswordWarning.isVisible()) return false;
         if (EmailWarning.isVisible()) return false;
         if (AddressWarning.isVisible()) return false;
+        if (User.getUser(UsernameTextField1.getText())!=null) return false;
         return true;
     }
     
