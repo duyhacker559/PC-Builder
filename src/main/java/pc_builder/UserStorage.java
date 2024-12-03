@@ -19,9 +19,9 @@ import org.json.*;
  * @author Admin
  */
 public class UserStorage{
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/pc_builder";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "987choithoi";
+    private static String DB_URL = "jdbc:mysql://localhost:3306/pc_builder";
+    private static String DB_USER = "root";
+    private static String DB_PASSWORD = "987choithoi";
     
     private static final String FILE_PATH = "Dat/users.json";
     private static final String primaryKey = "username";
@@ -113,7 +113,6 @@ public class UserStorage{
             newUser.put("email", "root@gmail");
             newUser.put("name", "Root");
             newUser.put("last_Name", "Root");
-            JSONObject birth = new JSONObject();
             newUser.put("birth", TimeHandler.getCurrentDay());
             newUser.put("gender", "Other");
             newUser.put("address", "Root-123");
@@ -450,10 +449,9 @@ public class UserStorage{
         if (StorageSystem.online) {
             String query = "UPDATE users SET username = ?, password = ?, name = ?, last_Name = ?, birth = ?, gender = ?, email = ?, address = ?, balance = ?, history = ?, admin = ? WHERE username = ?";
             try (Connection conn = getConnection();
-                 PreparedStatement stmt = conn.prepareStatement(query)) {
-                String hashedPassword = hashPassword(newItemData.getString("password"));
+                PreparedStatement stmt = conn.prepareStatement(query)) {
                 stmt.setString(1, newItemData.getString("username"));
-                stmt.setString(2, hashedPassword);
+                stmt.setString(2, newItemData.getString("password"));
                 stmt.setString(3, newItemData.getString("name"));
                 stmt.setString(4, newItemData.getString("last_Name"));
                 stmt.setString(5, newItemData.getString("birth"));

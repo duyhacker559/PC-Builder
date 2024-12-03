@@ -687,13 +687,13 @@ public class Login extends javax.swing.JFrame {
             .addGroup(LogoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(106, 106, 106)
+                .addGap(137, 137, 137)
                 .addComponent(CompanyLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Icon, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Description)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
                 .addComponent(License)
                 .addGap(50, 50, 50))
         );
@@ -949,6 +949,8 @@ public class Login extends javax.swing.JFrame {
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
         StorageSystem.online = !jToggleButton1.isSelected();
+        UserStorage.initiate();
+        DeviceStorage.initiate();
         User.loadUsers(UserStorage.loadItems());
         Device.loadDevices(DeviceStorage.loadItems());
     }//GEN-LAST:event_jToggleButton1ActionPerformed

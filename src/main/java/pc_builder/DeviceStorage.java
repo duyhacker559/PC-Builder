@@ -29,9 +29,9 @@ import org.json.JSONObject;
  * @author Admin
  */
 public class DeviceStorage {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/pc_builder";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "987choithoi";
+    public static String DB_URL = "jdbc:mysql://localhost:3306/pc_builder";
+    public static String DB_USER = "root";
+    public static String DB_PASSWORD = "987choithoi";
     
     private static final String FILE_PATH = "Dat/devices.json";
     private static final String primaryKey = "id";
