@@ -1529,7 +1529,7 @@ public class Home extends javax.swing.JFrame {
         for (String i: tagComponent) {
             tags.add(i);
         }
-        
+        boolean hasTag = (TagField.getText().compareTo("")!=0);
         BuildContent.removeAll();
         String pcBuildComponent[] = {"Case","Monitor","Key Board","Mouse"}; 
         TreeMap<String, Boolean> check = new TreeMap<>();
