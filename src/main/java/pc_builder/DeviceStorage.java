@@ -232,7 +232,7 @@ public class DeviceStorage {
                     stmt.setDouble(5, newItemData.getDouble("price"));
                     stmt.setString(6, newItemData.getString("des"));
                     stmt.setBoolean(7, newItemData.getBoolean("forSale"));
-                    stmt.setInt(8, newItemData.getInt("sale"));
+                    stmt.setDouble(8, newItemData.getDouble("sale"));
                     stmt.setString(9, newItemData.get("icon").toString());  // Store the icon as BLOB
                     stmt.setString(10, newItemData.getJSONObject("attributes").toString());
                     stmt.setString(11, newItemData.getJSONObject("info").toString());
@@ -371,7 +371,7 @@ public class DeviceStorage {
                     stmt.setDouble(4, newItemData.getDouble("price"));
                     stmt.setString(5, newItemData.getString("des"));
                     stmt.setBoolean(6, newItemData.getBoolean("forSale"));
-                    stmt.setInt(7, newItemData.getInt("sale"));
+                    stmt.setDouble(7, newItemData.getDouble("sale"));
                     stmt.setString(8, newItemData.get("icon").toString());  // Store the icon as BLOB
                     stmt.setString(9, newItemData.getJSONObject("attributes").toString());
                     stmt.setString(10, newItemData.getJSONObject("info").toString());
@@ -420,7 +420,7 @@ public class DeviceStorage {
                         item.put("price", rs.getDouble("price"));
                         item.put("des", rs.getString("description"));
                         item.put("forSale", rs.getBoolean("forSale"));
-                        item.put("sale", rs.getInt("sale"));
+                        item.put("sale", rs.getDouble("sale"));
 
                         // Retrieve and convert the icon from BLOB to Base64
                         byte[] iconData = rs.getBytes("icon");
