@@ -464,7 +464,7 @@ public class UserStorage{
                 stmt.setString(12, itemname);
                 stmt.executeUpdate();
                 System.out.println("Item updated successfully!");
-            } catch (SQLException | NoSuchAlgorithmException e) {
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         } else {
