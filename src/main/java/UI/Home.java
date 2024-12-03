@@ -1589,17 +1589,30 @@ public class Home extends javax.swing.JFrame {
         res.sort(new Comparator<BuildPC> (){
             @Override
             public int compare(BuildPC o1, BuildPC o2) {
-                int res = 0;
-                if (isCheapest) {
-                    res = Double.compare(o1.price, o2.price);
-                }
-                if (res == 0) {
-                    res = Integer.compare(o2.tagPoint, o1.tagPoint);
-                }
-                return res;
+                return Integer.compare(o2.tagPoint, o1.tagPoint);
             }
-            
         });
+        
+        if (isCheapest) {
+            res.sort(new Comparator<BuildPC> (){
+                
+                @Override
+                public int compare(BuildPC o1, BuildPC o2) {
+                    int res = 0;
+                    if (hasTag) {
+                        if (o1.tagPoint>=4) {
+                            if (o1.tagPoint*o2.tagPoint>0) {
+                                res = Double.compare(o1.price, o2.price);
+                            }
+                        }
+                    } else {
+                        res = Double.compare(o1.price, o2.price);
+                    }
+                    return res;
+                }
+
+            });
+        }
         // Create item frame
         
         int counter = 0;
