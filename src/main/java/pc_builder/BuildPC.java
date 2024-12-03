@@ -20,12 +20,16 @@ public class BuildPC {
         this.component = a;
         double totalPrice = 0;
         for (String i: component) {
+            int multiplier = 1;
             Device item = Device.items.get(i);
+            if (item.getType().compareTo("Case")==0) {
+                multiplier = 4;
+            }
             totalPrice += item.truePrice;
             performance += item.performance;
             for (String j: tags) {
                 if (item.trueName.contains(j)) {
-                    tagPoint++;
+                    tagPoint+=multiplier;
                 }
             }
         }
